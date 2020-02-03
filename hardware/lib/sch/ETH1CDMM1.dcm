@@ -1,0 +1,79 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 60817-096
+D PCB HANDLE A
+$ENDCMP
+#
+$CMP 9012
+D Miniature Molded SIP Reed Relay
+$ENDCMP
+#
+$CMP AD7380
+D Dual, Simultaneous Sampling, 16-Bit/14-Bit, 4 MSPS SAR ADCs, Differential Inputs
+$ENDCMP
+#
+$CMP AD8605
+D Precision, Low Noise, CMOS, Rail-to-Rail, Input/Output Operational Amplifiers
+$ENDCMP
+#
+$CMP AD8606-2-MSOP
+D Precision, Low Noise, CMOS, Rail-to-Rail, Input/Output Operational Amplifiers
+$ENDCMP
+#
+$CMP ADR4525BRZ
+D 2.5V Ultralow Noise, High Accuracy
+$ENDCMP
+#
+$CMP ADR45xx
+D Ultralow Noise, High Accuracy
+$ENDCMP
+#
+$CMP DAC7564
+D 12-Bit, Quad Channel, Ultra-Low Glitch, Voltage Output DIGITAL-TO-ANALOG CONVERTER with 2.5V,2ppm/°C Internal Reference
+$ENDCMP
+#
+$CMP DAC7568IxPWR
+D DAC7568, DAC8168, DAC8568 12-/14-/16-Bit, Octal-Channel, Ultralow Glitch, Voltage Output, Digital-to-Analog Converter swith 2.5-V 2-ppm/°C Internal Reference
+$ENDCMP
+#
+$CMP DAC8186IxPWR
+D DAC7568, DAC8168, DAC8568 12-/14-/16-Bit, Octal-Channel, Ultralow Glitch, Voltage Output, Digital-to-Analog Converter swith 2.5-V 2-ppm/°C Internal Reference
+$ENDCMP
+#
+$CMP DAC8568IxPWR
+D DAC7568, DAC8168, DAC8568 12-/14-/16-Bit, Octal-Channel, Ultralow Glitch, Voltage Output, Digital-to-Analog Converter swith 2.5-V 2-ppm/°C Internal Reference
+$ENDCMP
+#
+$CMP HA3-2525-5Z
+D 20MHz, High Slew Rate, Uncompensated, High Input Impedance, Operational Amplifiers
+$ENDCMP
+#
+$CMP LT3030
+D Dual 750mA/250mA Low Dropout, Low Noise,  Micropower Linear Regulator
+$ENDCMP
+#
+$CMP LT6350
+D Low Noise Single-Ended to Differential Converter/ADC Driver
+$ENDCMP
+#
+$CMP OPA602
+D High-Speed Precision Difet OPERATIONAL AMPLIFIER
+$ENDCMP
+#
+$CMP PGA103
+D PGA Programmable  Gain Amplifier G=1, 10, 100 V/V
+$ENDCMP
+#
+$CMP UMS05
+D Reed relay 5V DC coil
+$ENDCMP
+#
+$CMP UMS05-1A80-75D
+D Reed relay 5V DC coil
+$ENDCMP
+#
+$CMP UMS05-1A80-75D_copy
+D Reed relay 5V DC coil
+$ENDCMP
+#
+#End Doc Library
