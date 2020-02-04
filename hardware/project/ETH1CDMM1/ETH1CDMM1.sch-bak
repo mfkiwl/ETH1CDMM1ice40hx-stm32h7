@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 8
+Sheet 1 11
 Title ""
 Date ""
 Rev ""
@@ -20,19 +20,19 @@ F0 "MCU" 50
 F1 "MCU.sch" 50
 $EndSheet
 $Sheet
-S 8650 2850 1650 1700
+S 7350 4450 1650 1700
 U 5E3DE970
 F0 "Ethernet" 50
 F1 "Ethernet.sch" 50
 $EndSheet
 $Sheet
-S 3750 4350 1500 1300
+S 3900 4700 1200 1150
 U 5E3DEB69
 F0 "Power" 50
 F1 "Power.sch" 50
 $EndSheet
 $Sheet
-S 5900 4700 2150 1100
+S 5200 4700 1250 1150
 U 5E3DEC4F
 F0 "Power Float" 50
 F1 "Power_Float.sch" 50
@@ -54,5 +54,32 @@ S 1200 1500 1350 1550
 U 5F2D8EAC
 F0 "ADC" 50
 F1 "ADC.sch" 50
+$EndSheet
+$Sheet
+S 7700 950  1050 600 
+U 5E5FE909
+F0 "Input Protection" 50
+F1 "Input_Protection.sch" 50
+F2 "HS" I R 8750 1050 50 
+F3 "HI_SENSE" O L 7700 1050 50 
+F4 "HI" O L 7700 1150 50 
+F5 "H" I R 8750 1150 50 
+F6 "LS" I R 8750 1450 50 
+F7 "LO_SENSE" O L 7700 1450 50 
+F8 "I" I R 8750 1350 50 
+F9 "AMPS" O L 7700 1350 50 
+F10 "L" I R 8750 1250 50 
+$EndSheet
+$Sheet
+S 9700 2250 1150 1800
+U 5E7258D1
+F0 "Connector" 50
+F1 "Connector.sch" 50
+$EndSheet
+$Sheet
+S 6350 950  1150 600 
+U 5E73E20A
+F0 "Function Selection" 50
+F1 "Function_Selection.sch" 50
 $EndSheet
 $EndSCHEMATC
