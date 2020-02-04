@@ -44,16 +44,49 @@ $CMP DAC8568IxPWR
 D DAC7568, DAC8168, DAC8568 12-/14-/16-Bit, Octal-Channel, Ultralow Glitch, Voltage Output, Digital-to-Analog Converter swith 2.5-V 2-ppm/°C Internal Reference
 $ENDCMP
 #
+$CMP DG211CJD
+D Quad SPST CMOS Analog Switches
+K CMOS Analog Switch
+F http://pdf.datasheetcatalog.com/datasheets/70/494502_DS.pdf
+$ENDCMP
+#
 $CMP HA3-2525-5Z
 D 20MHz, High Slew Rate, Uncompensated, High Input Impedance, Operational Amplifiers
+$ENDCMP
+#
+$CMP LM399H
+D Precision Reference
 $ENDCMP
 #
 $CMP LT3030
 D Dual 750mA/250mA Low Dropout, Low Noise,  Micropower Linear Regulator
 $ENDCMP
 #
+$CMP LT5400
+D Quad Matched
+$ENDCMP
+#
+$CMP LT5400-100k-100k
+D Quad Matched
+$ENDCMP
+#
+$CMP LT5400-10k-10k
+D Quad Matched
+$ENDCMP
+#
+$CMP LT5400-5k-1k
+D Quad Matched
+K LT5400-5k-1k
+$ENDCMP
+#
 $CMP LT6350
 D Low Noise Single-Ended to Differential Converter/ADC Driver
+$ENDCMP
+#
+$CMP OPA140
+D OPAx140 High-precision, low-noise, rail-to-rail output,
+K single opamp
+F http://www.ti.com/lit/ds/symlink/lm741.pdf
 $ENDCMP
 #
 $CMP OPA602
@@ -74,6 +107,16 @@ $ENDCMP
 #
 $CMP UMS05-1A80-75D_copy
 D Reed relay 5V DC coil
+$ENDCMP
+#
+$CMP untitled
+D Quad Matched
+K LT5400-100k-100k
+$ENDCMP
+#
+$CMP untitled1
+D Quad Matched
+K LT5400-5k-1k
 $ENDCMP
 #
 #End Doc Library

@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name ETH1CDMM1)(type Legacy)(uri /home/grzegorz/git/ETH1CDMM1/hardware/lib/sch/ETH1CDMM1.lib)(options "")(descr ""))
+  (lib (name ETH1CDMM1_WINDOWS)(type Legacy)(uri C:/Users/behrensg/git-repos/ETH1CDMM1/hardware/lib/sch/ETH1CDMM1.lib)(options "")(descr "")(disabled))
 )
