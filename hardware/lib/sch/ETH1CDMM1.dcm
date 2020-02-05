@@ -4,8 +4,40 @@ $CMP 60817-096
 D PCB HANDLE A
 $ENDCMP
 #
+$CMP 7448013501
+D CMC 500UH 3.5A 2LN TH
+$ENDCMP
+#
+$CMP 7448014501
+D Common Mode Chokes / Filters WE-CMBNC Type XS Nancrystl 10kHz 4.5A
+$ENDCMP
+#
+$CMP 74489440068
+D Coupled Inductors WE-TDC SMD Size 8038 6.8uH .088Ohm Strt
+$ENDCMP
+#
+$CMP 749010012A
+D Transformator, LAN, 1 Port, 10/100 Base-T, 1500V AC, 350µH
+$ENDCMP
+#
+$CMP 74AC125
+D Quad Buffer with 3-STATE Outputs
+$ENDCMP
+#
+$CMP 74LVC1G08
+D The 74LVC1G08 is a single 2-input positive AND gate.
+$ENDCMP
+#
 $CMP 9012
 D Miniature Molded SIP Reed Relay
+$ENDCMP
+#
+$CMP AD706
+D Dual Picoampere Input Current
+$ENDCMP
+#
+$CMP AD711
+D Precision, Low Cost, High Speed, BiFET Op Amp
 $ENDCMP
 #
 $CMP AD7380
@@ -54,6 +86,10 @@ $CMP HA3-2525-5Z
 D 20MHz, High Slew Rate, Uncompensated, High Input Impedance, Operational Amplifiers
 $ENDCMP
 #
+$CMP IFNU406
+D Dual Matched N-Channel JFET
+$ENDCMP
+#
 $CMP LM399H
 D Precision Reference
 $ENDCMP
@@ -83,6 +119,14 @@ $CMP LT6350
 D Low Noise Single-Ended to Differential Converter/ADC Driver
 $ENDCMP
 #
+$CMP MORNTA2001QT5
+D Molded, Compact, 0.65 mm Pitch, Dual-In-Line Thin Film Resistor,
+$ENDCMP
+#
+$CMP OP27
+D Low Noise, Precision
+$ENDCMP
+#
 $CMP OPA140
 D OPAx140 High-precision, low-noise, rail-to-rail output,
 K single opamp
@@ -97,6 +141,10 @@ $CMP PGA103
 D PGA Programmable  Gain Amplifier G=1, 10, 100 V/V
 $ENDCMP
 #
+$CMP TMUX6104
+D 36-V, Low-Capacitance, Low-Leakage-Current
+$ENDCMP
+#
 $CMP UMS05
 D Reed relay 5V DC coil
 $ENDCMP
@@ -107,16 +155,6 @@ $ENDCMP
 #
 $CMP UMS05-1A80-75D_copy
 D Reed relay 5V DC coil
-$ENDCMP
-#
-$CMP untitled
-D Quad Matched
-K LT5400-100k-100k
-$ENDCMP
-#
-$CMP untitled1
-D Quad Matched
-K LT5400-5k-1k
 $ENDCMP
 #
 #End Doc Library

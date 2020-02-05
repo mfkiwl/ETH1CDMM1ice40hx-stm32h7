@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 11
+Sheet 1 12
 Title ""
 Date ""
 Rev ""
@@ -81,5 +81,11 @@ S 6350 950  1150 600
 U 5E73E20A
 F0 "Function Selection" 50
 F1 "Function_Selection.sch" 50
+$EndSheet
+$Sheet
+S 3500 950  2300 1300
+U 5E80E2F5
+F0 "DC Amplifier" 50
+F1 "DC_Amplifier.sch" 50
 $EndSheet
 $EndSCHEMATC

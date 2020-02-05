@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 8 11
+Sheet 8 12
 Title ""
 Date ""
 Rev ""
@@ -1317,10 +1317,10 @@ F 3 "" H 10800 4200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R R?
+L Device:R R808
 U 1 1 5E763344
 P 4450 5200
-F 0 "R?" V 4243 5200 50  0000 C CNN
+F 0 "R808" V 4243 5200 50  0000 C CNN
 F 1 "R" V 4334 5200 50  0000 C CNN
 F 2 "" V 4380 5200 50  0001 C CNN
 F 3 "~" H 4450 5200 50  0001 C CNN

@@ -1222,16 +1222,4 @@ Wire Wire Line
 	2500 5050 2500 4350
 Wire Wire Line
 	6000 5050 7550 5050
-Text HLabel 6600 6700 0    50   Input ~ 0
-DC_AMP2_MUX_A0
-Text HLabel 6600 6800 0    50   Input ~ 0
-DC_AMP2_MUX_A1
-Text HLabel 6600 6900 0    50   Input ~ 0
-DC_AMP2_MUX_EN
-Wire Wire Line
-	6600 6700 6650 6700
-Wire Wire Line
-	6650 6800 6600 6800
-Wire Wire Line
-	6600 6900 6650 6900
 $EndSCHEMATC
