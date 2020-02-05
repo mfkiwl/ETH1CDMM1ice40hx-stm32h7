@@ -60,6 +60,10 @@ $CMP ADR45xx
 D Ultralow Noise, High Accuracy
 $ENDCMP
 #
+$CMP AQW212S
+D Miniature SOP8-pin type of 60V/350V/400V load voltage
+$ENDCMP
+#
 $CMP DAC7564
 D 12-Bit, Quad Channel, Ultra-Low Glitch, Voltage Output DIGITAL-TO-ANALOG CONVERTER with 2.5V,2ppm/°C Internal Reference
 $ENDCMP
@@ -117,6 +121,10 @@ $ENDCMP
 #
 $CMP LT6350
 D Low Noise Single-Ended to Differential Converter/ADC Driver
+$ENDCMP
+#
+$CMP MCZ33996
+D 16 Output Switch with SPI Control
 $ENDCMP
 #
 $CMP MORNTA2001QT5

@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 2 12
+Sheet 2 13
 Title ""
 Date ""
 Rev ""
@@ -890,34 +890,6 @@ Wire Wire Line
 	14600 4900 14550 4900
 Wire Wire Line
 	14550 5000 14600 5000
-Text HLabel 14600 5400 2    50   Input ~ 0
-MCU1_STATUS_IN1
-Text HLabel 14600 5500 2    50   Output ~ 0
-MCU1_GPIO_OUT2
-Text HLabel 14600 5600 2    50   Output ~ 0
-MCU1_GPIO_OUT1
-Wire Wire Line
-	14600 5500 14550 5500
-Wire Wire Line
-	14550 5600 14600 5600
-Wire Wire Line
-	14600 5400 14550 5400
-Wire Wire Line
-	14550 5700 14600 5700
-Wire Wire Line
-	14600 5800 14550 5800
-Wire Wire Line
-	14550 5900 14600 5900
-Wire Wire Line
-	14600 6000 14550 6000
-Text HLabel 14600 5700 2    50   Output ~ 0
-MCU1_~SS
-Text HLabel 14600 5900 2    50   Input ~ 0
-MCU1_MISO
-Text HLabel 14600 6000 2    50   Output ~ 0
-MCU1_MOSI
-Text HLabel 14600 5800 2    50   Output ~ 0
-MCU1_MCLK
 Wire Wire Line
 	1750 1300 3150 1300
 NoConn ~ 3150 1800
@@ -1330,10 +1302,6 @@ NoConn ~ 3150 2400
 NoConn ~ 3150 2500
 NoConn ~ 3150 4900
 NoConn ~ 3150 5100
-Text HLabel 14600 5300 2    50   Input ~ 0
-MCU1_STATUS_IN2
-Wire Wire Line
-	14600 5300 14550 5300
 NoConn ~ 14550 7600
 NoConn ~ 14550 7700
 NoConn ~ 14550 7800
@@ -1481,4 +1449,24 @@ F 3 "" H 2150 6300 50  0001 C CNN
 	1    2150 6300
 	0    -1   -1   0   
 $EndComp
+NoConn ~ 14550 5300
+NoConn ~ 14550 5400
+NoConn ~ 14550 5500
+NoConn ~ 14550 5600
+NoConn ~ 14550 5700
+NoConn ~ 14550 5800
+NoConn ~ 14550 5900
+NoConn ~ 14550 6000
+Text HLabel 800  6050 2    50   Output ~ 0
+CXN_REL6
+Text HLabel 800  6150 2    50   Output ~ 0
+CXN_REL5
+Text HLabel 800  6250 2    50   Output ~ 0
+CXN_REL4
+Text HLabel 800  6350 2    50   Output ~ 0
+CXN_REL3
+Text HLabel 800  6450 2    50   Output ~ 0
+CXN_REL2
+Text HLabel 800  6550 2    50   Output ~ 0
+CXN_REL1
 $EndSCHEMATC

@@ -60,6 +60,10 @@ $CMP ADR45xx
 D Ultralow Noise, High Accuracy
 $ENDCMP
 #
+$CMP AQW212S
+D Miniature SOP8-pin type of 60V/350V/400V load voltage
+$ENDCMP
+#
 $CMP DAC7564
 D 12-Bit, Quad Channel, Ultra-Low Glitch, Voltage Output DIGITAL-TO-ANALOG CONVERTER with 2.5V,2ppm/°C Internal Reference
 $ENDCMP
@@ -139,6 +143,10 @@ $ENDCMP
 #
 $CMP PGA103
 D PGA Programmable  Gain Amplifier G=1, 10, 100 V/V
+$ENDCMP
+#
+$CMP TMUX6104
+D 36-V, Low-Capacitance, Low-Leakage-Current
 $ENDCMP
 #
 $CMP UMS05

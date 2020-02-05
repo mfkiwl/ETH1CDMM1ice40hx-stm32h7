@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 8 12
+Sheet 8 13
 Title ""
 Date ""
 Rev ""
@@ -29,7 +29,7 @@ Wire Wire Line
 Wire Wire Line
 	3400 1100 3050 1100
 Text HLabel 3050 1100 0    50   Input ~ 0
-ADC_IN
+ADIN
 $Comp
 L ETH1CDMM1:AGNDF #PWR0801
 U 1 1 5E3957BE
