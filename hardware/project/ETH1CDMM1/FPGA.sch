@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 7 13
+Sheet 7 14
 Title ""
 Date ""
 Rev ""
@@ -79,4 +79,90 @@ F 3 "" H 9350 6500 50  0001 C CNN
 	4    9850 5300
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	2700 5750 2650 5750
+Wire Wire Line
+	2650 5750 2650 5650
+Wire Wire Line
+	2650 4950 2700 4950
+Wire Wire Line
+	2700 5050 2650 5050
+Connection ~ 2650 5050
+Wire Wire Line
+	2650 5050 2650 4950
+Wire Wire Line
+	2700 5150 2650 5150
+Connection ~ 2650 5150
+Wire Wire Line
+	2650 5150 2650 5050
+Wire Wire Line
+	2700 5250 2650 5250
+Connection ~ 2650 5250
+Wire Wire Line
+	2650 5250 2650 5150
+Wire Wire Line
+	2700 5350 2650 5350
+Connection ~ 2650 5350
+Wire Wire Line
+	2650 5350 2650 5250
+Wire Wire Line
+	2700 5450 2650 5450
+Connection ~ 2650 5450
+Wire Wire Line
+	2650 5450 2650 5350
+Wire Wire Line
+	2700 5550 2650 5550
+Connection ~ 2650 5550
+Wire Wire Line
+	2650 5550 2650 5450
+Wire Wire Line
+	2700 5650 2650 5650
+Connection ~ 2650 5650
+Wire Wire Line
+	2650 5650 2650 5550
+$Comp
+L ETH1CDMM1:DGNDF #PWR0111
+U 1 1 5EB6BA92
+P 2600 5350
+F 0 "#PWR0111" H 2600 5100 50  0001 C CNN
+F 1 "DGNDF" V 2600 5200 50  0000 R CNN
+F 2 "" H 2600 5350 50  0001 C CNN
+F 3 "" H 2600 5350 50  0001 C CNN
+	1    2600 5350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2600 5350 2650 5350
+Wire Wire Line
+	4300 6150 4350 6150
+Wire Wire Line
+	4350 6150 4350 6050
+Wire Wire Line
+	4350 5850 4300 5850
+Wire Wire Line
+	4300 5950 4350 5950
+Connection ~ 4350 5950
+Wire Wire Line
+	4350 5950 4350 5850
+Wire Wire Line
+	4300 6050 4350 6050
+Connection ~ 4350 6050
+Wire Wire Line
+	4350 6050 4350 6000
+$Comp
+L power:+3.3VP #PWR0112
+U 1 1 5EB8E986
+P 4400 6000
+F 0 "#PWR0112" H 4550 5950 50  0001 C CNN
+F 1 "+3.3VP" V 4400 6100 50  0000 L CNN
+F 2 "" H 4400 6000 50  0001 C CNN
+F 3 "" H 4400 6000 50  0001 C CNN
+	1    4400 6000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4400 6000 4350 6000
+Connection ~ 4350 6000
+Wire Wire Line
+	4350 6000 4350 5950
 $EndSCHEMATC

@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 8 13
+Sheet 8 14
 Title ""
 Date ""
 Rev ""
@@ -1349,4 +1349,57 @@ Wire Wire Line
 	4200 5200 4100 5200
 Wire Wire Line
 	4200 4550 4200 5200
+Wire Wire Line
+	1600 4900 1650 4900
+Wire Wire Line
+	1650 4900 1650 4450
+Connection ~ 950  5000
+Wire Wire Line
+	900  5000 950  5000
+Text HLabel 900  5000 0    50   Output ~ 0
+-7VREF
+Wire Wire Line
+	950  5000 1000 5000
+Wire Wire Line
+	950  4450 950  5000
+Wire Wire Line
+	1650 4450 950  4450
+NoConn ~ 1200 5300
+NoConn ~ 1300 5300
+$Comp
+L ETH1CDMM1:AGNDF #PWR0847
+U 1 1 5E3EF441
+P 1400 4700
+F 0 "#PWR0847" H 1400 4450 50  0001 C CNN
+F 1 "AGNDF" H 1405 4527 50  0000 C CNN
+F 2 "" H 1400 4700 50  0001 C CNN
+F 3 "" H 1400 4700 50  0001 C CNN
+	1    1400 4700
+	-1   0    0    1   
+$EndComp
+$Comp
+L ETH1CDMM1:-15VF #PWR0848
+U 1 1 5E3ED11E
+P 1400 5300
+F 0 "#PWR0848" H 1400 5150 50  0001 C CNN
+F 1 "-15VF" H 1415 5473 50  0000 C CNN
+F 2 "" H 1400 5300 50  0001 C CNN
+F 3 "" H 1400 5300 50  0001 C CNN
+	1    1400 5300
+	-1   0    0    1   
+$EndComp
+$Comp
+L Amplifier_Operational:TL071 U812
+U 1 1 5E3E3CF0
+P 1300 5000
+F 0 "U812" H 1350 5250 50  0000 L CNN
+F 1 "TL071" H 1350 5150 50  0000 L CNN
+F 2 "" H 1350 5050 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 1450 5150 50  0001 C CNN
+	1    1300 5000
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	1600 5100 1850 5100
+Connection ~ 1850 5100
 $EndSCHEMATC

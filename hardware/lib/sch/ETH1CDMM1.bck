@@ -52,6 +52,12 @@ $CMP AD8606-2-MSOP
 D Precision, Low Noise, CMOS, Rail-to-Rail, Input/Output Operational Amplifiers
 $ENDCMP
 #
+$CMP ADG1414BRU
+D ±15V, +12V, ±5V, 9.5 Ohm on resistance, iCMOS Serially-Controlled Octal SPST Switches, TSSOP-24
+K SPI SPST Analog Switches
+F https://www.analog.com/media/en/technical-documentation/data-sheets/ADG1414.pdf
+$ENDCMP
+#
 $CMP ADR4525BRZ
 D 2.5V Ultralow Noise, High Accuracy
 $ENDCMP
@@ -123,6 +129,10 @@ $CMP LT6350
 D Low Noise Single-Ended to Differential Converter/ADC Driver
 $ENDCMP
 #
+$CMP MCZ33996
+D 16 Output Switch with SPI Control
+$ENDCMP
+#
 $CMP MORNTA2001QT5
 D Molded, Compact, 0.65 mm Pitch, Dual-In-Line Thin Film Resistor,
 $ENDCMP
@@ -145,6 +155,10 @@ $CMP PGA103
 D PGA Programmable  Gain Amplifier G=1, 10, 100 V/V
 $ENDCMP
 #
+$CMP SYM_Analog_Switch
+F ~
+$ENDCMP
+#
 $CMP TMUX6104
 D 36-V, Low-Capacitance, Low-Leakage-Current
 $ENDCMP
@@ -154,10 +168,6 @@ D Reed relay 5V DC coil
 $ENDCMP
 #
 $CMP UMS05-1A80-75D
-D Reed relay 5V DC coil
-$ENDCMP
-#
-$CMP UMS05-1A80-75D_copy
 D Reed relay 5V DC coil
 $ENDCMP
 #
