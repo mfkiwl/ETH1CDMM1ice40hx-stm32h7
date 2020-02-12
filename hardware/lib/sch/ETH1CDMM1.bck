@@ -96,6 +96,10 @@ $CMP HA3-2525-5Z
 D 20MHz, High Slew Rate, Uncompensated, High Input Impedance, Operational Amplifiers
 $ENDCMP
 #
+$CMP IFN406
+D Dual Matched N-Channel JFET
+$ENDCMP
+#
 $CMP IFNU406
 D Dual Matched N-Channel JFET
 $ENDCMP
@@ -135,6 +139,10 @@ $ENDCMP
 #
 $CMP MORNTA2001QT5
 D Molded, Compact, 0.65 mm Pitch, Dual-In-Line Thin Film Resistor,
+$ENDCMP
+#
+$CMP MT25QL128ABA1ESE
+D 3V, Multiple I/O, 4KB, 32KB, 64KB, Sector Erase
 $ENDCMP
 #
 $CMP OP27

@@ -96,7 +96,7 @@ $CMP HA3-2525-5Z
 D 20MHz, High Slew Rate, Uncompensated, High Input Impedance, Operational Amplifiers
 $ENDCMP
 #
-$CMP IFNU406
+$CMP IFN406
 D Dual Matched N-Channel JFET
 $ENDCMP
 #

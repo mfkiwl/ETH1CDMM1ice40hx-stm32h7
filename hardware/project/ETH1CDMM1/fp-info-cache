@@ -1,4 +1,4 @@
-16957665880777329
+16962398394261329
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -46130,12 +46130,26 @@ HE3600 Miniature Single In-line Reed Relay
 4
 4
 ETH1CDMM1
+HSOP-32-1EP_7.5x11.0mm_P0.65mm_ThermalVias
+HSOP32, plastic, thermal enhanced small outline package; 32 terminals; 0.65 mm pitch; 7.5 mm x 11 mmx 2.22 mm body
+HSOP 7.5 x 11.0mm Pitch 0.65mm
+0
+33
+33
+ETH1CDMM1
 JZ
 J Series Outperforms All Other Similar Trimmers
 
 0
 2
 2
+ETH1CDMM1
+LMx99
+
+
+0
+4
+4
 ETH1CDMM1
 NX3225GD
  A small surface-mount type crystal unit, ideal for an engine control CPU clock
@@ -46206,6 +46220,13 @@ THL 15WI Series, 15 Watt
 0
 6
 6
+ETH1CDMM1
+TO-71
+
+
+0
+0
+0
 ETH1CDMM1
 TO-252-2_Rectifier
 TO-252-2
