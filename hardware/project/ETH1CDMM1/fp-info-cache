@@ -1,4 +1,4 @@
-16962398394261329
+16973472071764329
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -46032,6 +46032,20 @@ WE-CMBNC Common Mode PowerLine Choke Nanocrystalline
 4
 4
 ETH1CDMM1
+7448014501
+WE-CMBNC Common Mode PowerLine Choke Nanocrystalline
+
+0
+4
+4
+ETH1CDMM1
+4032
+
+
+0
+2
+2
+ETH1CDMM1
 9012
 COTO Miniature Molded SIP Reed Relay
 
@@ -46109,6 +46123,13 @@ DO_214AA_REV
 2
 2
 ETH1CDMM1
+D_SOD-323HE
+SOD-323HE
+SOD-323HE
+0
+2
+2
+ETH1CDMM1
 ECS
 
 
@@ -46122,6 +46143,20 @@ Fuse SMD2920
 0
 2
 2
+ETH1CDMM1
+GDT
+
+
+0
+2
+2
+ETH1CDMM1
+GU-SOP8
+
+
+0
+8
+8
 ETH1CDMM1
 HE360_x-5050462-8
 HE3600 Miniature Single In-line Reed Relay
@@ -46225,8 +46260,8 @@ TO-71
 
 
 0
-0
-0
+6
+6
 ETH1CDMM1
 TO-252-2_Rectifier
 TO-252-2
@@ -46255,6 +46290,20 @@ DC/DC Converter TSR 2 Series, 2 A
 0
 3
 3
+ETH1CDMM1
+TSSOP-54
+
+SSOP 0.8
+0
+54
+54
+ETH1CDMM1
+WSR5
+
+
+0
+2
+2
 Ferrite_THT
 LairdTech_28C0236-0JW-10
 Ferrite, vertical, LairdTech 28C0236-0JW-10, https://assets.lairdtech.com/home/brandworld/files/28C0236-0JW-10.pdf, JW Miller core https://www.bourns.com/products/magnetic-products/j.w.-miller-through-hole-ferrite-beads-emi-filters
