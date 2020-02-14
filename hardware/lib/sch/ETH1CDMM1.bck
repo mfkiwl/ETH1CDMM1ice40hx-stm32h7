@@ -100,10 +100,6 @@ $CMP IFN406
 D Dual Matched N-Channel JFET
 $ENDCMP
 #
-$CMP IFNU406
-D Dual Matched N-Channel JFET
-$ENDCMP
-#
 $CMP LM399H
 D Precision Reference
 $ENDCMP

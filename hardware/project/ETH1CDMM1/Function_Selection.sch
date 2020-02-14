@@ -1139,23 +1139,23 @@ Wire Wire Line
 Wire Wire Line
 	10050 3250 10450 3250
 Text Label 9200 1900 2    50   ~ 0
-DCV_LOW
+DCV_L_CTR
 Text Label 8800 3200 2    50   ~ 0
-DCV_HIGH
+DCV_H_CTR
 Text Label 8750 4150 2    50   ~ 0
-4W_HI
+4W_HI_CTR
 Text Label 8750 4950 2    50   ~ 0
-AMPS
+AMPS_CTR
 Text Label 8750 5600 2    50   ~ 0
-VZERO
+VZERO_CTR
 Text Label 8750 6250 2    50   ~ 0
-4W_LO
+4W_LO_CTR
 Text Label 10450 5100 2    50   ~ 0
-DCV_AMP
+DCV_A_CTR
 Text Label 10450 3950 2    50   ~ 0
-MZ
+MZ_CTR
 Text Label 10450 3250 2    50   ~ 0
-MC
+MC_CTR
 Text HLabel 1150 2650 0    50   Input ~ 0
 HI
 Wire Wire Line
@@ -1177,39 +1177,39 @@ Wire Wire Line
 Wire Wire Line
 	1200 6400 700  6400
 Text Label 700  6400 0    50   ~ 0
-DCV_LOW
+DCV_L_CTR
 Wire Wire Line
 	1200 6500 700  6500
 Text Label 700  6500 0    50   ~ 0
-DCV_HIGH
+DCV_H_CTR
 Wire Wire Line
 	1200 6600 700  6600
 Text Label 700  6600 0    50   ~ 0
-4W_HI
+4W_HI_CTR
 Wire Wire Line
 	1200 6700 700  6700
 Text Label 700  6700 0    50   ~ 0
-AMPS
+AMPS_CTR
 Wire Wire Line
 	1200 6800 700  6800
 Text Label 700  6800 0    50   ~ 0
-VZERO
+VZERO_CTR
 Wire Wire Line
 	1200 6900 700  6900
 Text Label 700  6900 0    50   ~ 0
-4W_LO
+4W_LO_CTR
 Wire Wire Line
 	1200 7000 700  7000
 Text Label 700  7000 0    50   ~ 0
-DCV_AMP
+DCV_A_CTR
 Wire Wire Line
 	1200 7100 700  7100
 Text Label 700  7100 0    50   ~ 0
-MZ
+MZ_CTR
 Wire Wire Line
 	1200 7200 700  7200
 Text Label 700  7200 0    50   ~ 0
-MC
+MC_CTR
 $Comp
 L ETH1CDMM1:MCZ33996 U901
 U 1 1 5F327CC8
