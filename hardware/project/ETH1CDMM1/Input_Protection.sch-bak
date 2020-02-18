@@ -50,17 +50,6 @@ Wire Wire Line
 	5300 900  5150 900 
 Wire Wire Line
 	4850 900  4700 900 
-$Comp
-L Device:C C803
-U 1 1 5E6011E7
-P 6450 1100
-F 0 "C803" H 6565 1146 50  0000 L CNN
-F 1 "220p" H 6565 1055 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 6488 950 50  0001 C CNN
-F 3 "~" H 6450 1100 50  0001 C CNN
-	1    6450 1100
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	6450 950  6450 900 
 Wire Wire Line

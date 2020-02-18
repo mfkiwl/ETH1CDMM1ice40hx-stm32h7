@@ -433,8 +433,6 @@ Wire Wire Line
 Wire Wire Line
 	3150 2700 3100 2700
 Wire Wire Line
-	3100 2700 3100 2750
-Wire Wire Line
 	3100 2800 3150 2800
 Wire Wire Line
 	2900 2550 3100 2550
@@ -443,13 +441,6 @@ Wire Wire Line
 	3100 2550 3100 2600
 Text Label 2900 2550 0    50   ~ 0
 H
-Wire Wire Line
-	2900 2750 3100 2750
-Connection ~ 3100 2750
-Wire Wire Line
-	3100 2750 3100 2800
-Text Label 2900 2750 0    50   ~ 0
-I
 Wire Wire Line
 	3150 2900 3100 2900
 Wire Wire Line
@@ -650,4 +641,6 @@ F 3 "" H 3050 6200 50  0001 C CNN
 	1    3050 6250
 	0    1    1    0   
 $EndComp
+Wire Wire Line
+	3100 2700 3100 2800
 $EndSCHEMATC
