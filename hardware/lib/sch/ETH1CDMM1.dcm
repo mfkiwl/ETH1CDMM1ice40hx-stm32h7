@@ -66,7 +66,19 @@ $CMP ADR45xx
 D Ultralow Noise, High Accuracy
 $ENDCMP
 #
+$CMP AQW210S
+D Miniature SOP8-pin type of 60V/350V/400V load voltage
+$ENDCMP
+#
 $CMP AQW212S
+D Miniature SOP8-pin type of 60V/350V/400V load voltage
+$ENDCMP
+#
+$CMP AQW214S
+D Miniature SOP8-pin type of 60V/350V/400V load voltage
+$ENDCMP
+#
+$CMP AQW21xS
 D Miniature SOP8-pin type of 60V/350V/400V load voltage
 $ENDCMP
 #
