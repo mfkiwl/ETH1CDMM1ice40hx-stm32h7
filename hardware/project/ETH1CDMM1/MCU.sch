@@ -1865,9 +1865,9 @@ Wire Wire Line
 Connection ~ 1700 2900
 Wire Wire Line
 	1500 2400 1700 2400
+Connection ~ 1500 2400
 Wire Bus Line
 	1250 5750 1250 7050
 Wire Bus Line
 	1250 3950 1250 5550
-Connection ~ 1500 2400
 $EndSCHEMATC
