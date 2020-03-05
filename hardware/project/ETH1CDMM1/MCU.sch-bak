@@ -1698,10 +1698,10 @@ Text HLabel 3100 2100 0    50   Output ~ 0
 OCS_~SYNC
 Text HLabel 3100 2200 0    50   Output ~ 0
 OCS_SCLK
-Text HLabel 3100 2500 0    50   Output ~ 0
+Text HLabel 3100 5900 0    50   Output ~ 0
 OSC_HV_PROT
 Wire Wire Line
-	3100 2500 3150 2500
+	3100 5900 3150 5900
 Wire Wire Line
 	14550 2200 14600 2200
 Text HLabel 14600 2200 2    50   Output ~ 0
@@ -1854,7 +1854,6 @@ Connection ~ 1700 2900
 Wire Wire Line
 	1500 2400 1700 2400
 Connection ~ 1500 2400
-NoConn ~ 3150 5900
 NoConn ~ 3150 6000
 NoConn ~ 3150 6100
 Wire Wire Line
@@ -1866,6 +1865,7 @@ NoConn ~ 14550 6400
 NoConn ~ 14550 6300
 NoConn ~ 14550 7200
 NoConn ~ 3150 5100
+NoConn ~ 3150 2500
 Wire Bus Line
 	1250 5750 1250 7050
 Wire Bus Line
