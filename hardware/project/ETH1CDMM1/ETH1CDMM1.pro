@@ -1,4 +1,4 @@
-update=Sun Mar  1 19:58:40 2020
+update=05.03.2020 14:02:52
 version=1
 last_client=kicad
 [general]
@@ -101,7 +101,7 @@ Type=1
 Enabled=1
 [pcbnew/Layer.In4.Cu]
 Name=Signal_Inter
-Type=1
+Type=2
 Enabled=1
 [pcbnew/Layer.In5.Cu]
 Name=In5.Cu
