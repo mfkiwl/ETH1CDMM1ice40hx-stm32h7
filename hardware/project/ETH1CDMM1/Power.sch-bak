@@ -4,8 +4,8 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 3 14
-Title "Power supply one"
-Date "2020-01-19"
+Title "Power"
+Date "2020-03-07"
 Rev "1.0"
 Comp ""
 Comment1 "Verification done. "

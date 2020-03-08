@@ -5,10 +5,10 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 12 14
 Title "Connector"
-Date "2020-01-19"
-Rev "1.0"
+Date "2020-03-07"
+Rev "1.00"
 Comp ""
-Comment1 "Verification done. "
+Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""

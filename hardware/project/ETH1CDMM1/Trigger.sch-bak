@@ -4,9 +4,9 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 5 14
-Title ""
-Date ""
-Rev ""
+Title "Trigger"
+Date "2020-03-07"
+Rev "1.00"
 Comp ""
 Comment1 ""
 Comment2 ""

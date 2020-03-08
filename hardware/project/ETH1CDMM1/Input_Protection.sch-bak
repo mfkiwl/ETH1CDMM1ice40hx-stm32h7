@@ -4,9 +4,9 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 8 14
-Title ""
-Date ""
-Rev ""
+Title "Input protection"
+Date "2020-03-07"
+Rev "1.00"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -104,7 +104,7 @@ U 1 1 5E60949A
 P 5200 2400
 F 0 "R803" H 5270 2446 50  0000 L CNN
 F 1 "1M/400V/.5W" H 5270 2355 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 5130 2400 50  0001 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder" V 5130 2400 50  0001 C CNN
 F 3 "~" H 5200 2400 50  0001 C CNN
 	1    5200 2400
 	1    0    0    -1  
@@ -115,7 +115,7 @@ U 1 1 5E60AA85
 P 5200 2800
 F 0 "R804" H 5270 2846 50  0000 L CNN
 F 1 "1M/400V/.5W" H 5270 2755 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 5130 2800 50  0001 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder" V 5130 2800 50  0001 C CNN
 F 3 "~" H 5200 2800 50  0001 C CNN
 	1    5200 2800
 	1    0    0    -1  

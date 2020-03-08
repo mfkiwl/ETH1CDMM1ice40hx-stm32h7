@@ -4,8 +4,8 @@ EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
 Sheet 4 14
-Title "Power supply second"
-Date "2020-01-19"
+Title "Power float"
+Date "2020-03-07"
 Rev "1.0"
 Comp ""
 Comment1 "Verification done."
@@ -229,7 +229,7 @@ L Device:R R408
 U 1 1 5DD4B340
 P 7000 2500
 F 0 "R408" H 7070 2546 50  0000 L CNN
-F 1 "R" H 7070 2455 50  0000 L CNN
+F 1 "97k6" H 7070 2455 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6930 2500 50  0001 C CNN
 F 3 "~" H 7000 2500 50  0001 C CNN
 	1    7000 2500
@@ -511,7 +511,7 @@ L Device:R R410
 U 1 1 5DE7209C
 P 7000 4850
 F 0 "R410" H 7070 4896 50  0000 L CNN
-F 1 "R" H 7070 4805 50  0000 L CNN
+F 1 "46k4" H 7070 4805 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6930 4850 50  0001 C CNN
 F 3 "~" H 7000 4850 50  0001 C CNN
 	1    7000 4850
