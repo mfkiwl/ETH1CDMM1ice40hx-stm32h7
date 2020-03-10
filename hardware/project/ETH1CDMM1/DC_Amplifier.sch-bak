@@ -346,7 +346,7 @@ F 1 "MMBF4392LT1G" V 9687 1850 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23" H 9650 1950 50  0001 C CNN
 F 3 "~" H 9450 1850 50  0001 C CNN
 	1    9450 1850
-	0    -1   -1   0   
+	0    1    -1   0   
 $EndComp
 Wire Wire Line
 	9450 2050 9450 2100
