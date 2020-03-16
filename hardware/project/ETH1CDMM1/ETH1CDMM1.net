@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/grzegorz/git/ETH1CDMM1/hardware/project/ETH1CDMM1/ETH1CDMM1.sch)
-    (date "Thu Mar 12 20:52:13 2020")
+    (date "Mon Mar 16 23:18:19 2020")
     (tool "Eeschema 5.1.5")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
