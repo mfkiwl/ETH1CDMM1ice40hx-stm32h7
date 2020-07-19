@@ -2360,4 +2360,6 @@ F 3 "" H 8550 8550 50  0001 C CNN
 	1    8550 8550
 	1    0    0    -1  
 $EndComp
+Text Notes 9650 5300 0    50   ~ 0
+9012 - too high, replace with 9011
 $EndSCHEMATC

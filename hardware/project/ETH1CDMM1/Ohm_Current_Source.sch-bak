@@ -168,7 +168,7 @@ $Comp
 L Amplifier_Operational:OP07 U1103
 U 1 1 5E505440
 P 6250 1900
-F 0 "U1103" H 6400 2150 50  0000 L CNN
+F 0 "U1103" H 6350 2150 50  0000 L CNN
 F 1 "OP07" H 6350 2050 50  0000 L CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 6300 1950 50  0001 C CNN
 F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/OP07.pdf" H 6300 2050 50  0001 C CNN
