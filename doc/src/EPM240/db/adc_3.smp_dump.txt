@@ -1,0 +1,31 @@
+
+State Machine - |adc_3|uart_frame_state
+Name uart_frame_state.000 uart_frame_state.010 uart_frame_state.001 
+uart_frame_state.000 0 0 0 
+uart_frame_state.001 1 0 1 
+uart_frame_state.010 1 1 0 
+
+State Machine - |adc_3|uart_frame_r
+Name uart_frame_r.001 
+uart_frame_r.000 0 
+uart_frame_r.001 1 
+
+State Machine - |adc_3|runup_state_r
+Name runup_state_r.1 
+runup_state_r.0 0 
+runup_state_r.1 1 
+
+State Machine - |adc_3|state
+Name state.011 state.010 state.001 state.000 
+state.000 0 0 0 0 
+state.001 0 0 1 1 
+state.010 0 1 0 1 
+state.011 1 0 0 1 
+
+State Machine - |adc_3|uart_tx:uart_tx_a|uart_tx_state
+Name uart_tx_state.011 uart_tx_state.000 uart_tx_state.001 uart_tx_state.010 uart_tx_state.100 
+uart_tx_state.010 0 0 0 0 0 
+uart_tx_state.001 0 0 1 1 0 
+uart_tx_state.000 0 1 0 1 0 
+uart_tx_state.011 1 0 0 1 0 
+uart_tx_state.100 0 0 0 1 1 

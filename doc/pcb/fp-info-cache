@@ -38,86 +38,86 @@ B1,27
 C050-035X075
 <b>CAPACITOR</b><p>
 grid 5 mm, outline 3.5 x 7.5 mm
-
+0
 0
 2
 2
 2_adc
 C150-054X183
 <b>CAPACITOR</b><p>
-grid 15 mm, outline 5.4 x 18.3 mm
-
+0
+0
 0
 2
 2
 2_adc
 CHIPLED_0805
-<b>CHIPLED</b><p>
-Source: http://www.osram.convergy.de/ ... LG_R971.pdf
-
+0
+0
+0
 0
 2
 2
 2_adc
-ML10
-<b>HARTING</b>
-
+0
+0
+0
 0
 10
 10
 2_adc
-MSOP8-EP
-
-
+0
+0
+0
 0
 9
 9
 2_adc
-QFP50P1600X1600X120-100N
-
-
+0
+0
+0
 0
 100
 100
 2_adc
-R0805
-
-
+0
+0
+0
 0
 2
 2
 2_adc
-R_TR191
-
-
+0
+0
+0
 0
 2
 2
 2_adc
-SG-615
-<b>SOJ HIGH-FREQUENCY CRYSTAL OSCILLATOR</b><p>
-Source: Crystal Oscillator SG-615%20Series.pdf
+0
+0
+0
 
 0
 4
 4
-2_adc
-SMC_C
-<b>Chip Capacitor </b> Polar tantalum capacitors with solid electrolyte<p>
+2
+0
+0
 Siemens Matsushita Components B 45 194, B 45 197, B 45 198<br>
 Source: www.farnell.com/datasheets/247.pdf
 
 0
 2
 2
-2_adc
+2
 SO-08
 
 
 0
 8
 8
-2_adc
+2
 SO08
 <b>Small Outline Package 8</b><br>
 NS Package M08A

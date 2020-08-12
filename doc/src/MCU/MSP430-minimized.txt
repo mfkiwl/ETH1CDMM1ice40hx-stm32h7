@@ -1,0 +1,284 @@
+#include <msp430.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void u2_tx (unsigned char data);
+void u2_tx_s (unsigned char * data);
+void u3_tx (unsigned char data);
+void u3_tx_s (unsigned char * data);
+void u1_tx (unsigned char data);
+int comp(const void *e1, const void *e2);
+void adc_set_zero (unsigned char value);
+void adc_set_hiz (unsigned char value);
+long adc_get_raw (unsigned char * input_data);
+
+#define AVG_SIZE_MAX    180
+#define AVG_START_MAX   50
+#define AVG_NUM_MAX     65
+#define AVG_SIZE_MID    80
+#define AVG_START_MID   20
+#define AVG_NUM_MID     40
+#define AVG_SIZE_MIN    20
+#define AVG_START_MIN   6
+#define AVG_NUM_MIN     7
+int avg_size, avg_start, avg_num;
+
+char u3_rcvd_str[10],u3_rcvd_ptr;
+volatile char u3_rcvd_flag, adc_data_flag;
+char u2_rcvd_str[10],u2_rcvd_ptr;
+volatile char u2_rcvd_flag;
+volatile char adc_data[4],adc_data_temp[4],adc_data_ptr;
+
+char tx_str[25],txc_str[25];
+long result,num;
+long results_in[AVG_SIZE_MAX],results_in_s[AVG_SIZE_MAX];
+unsigned int results_in_p=0;
+long results_zero[AVG_SIZE_MAX],results_zero_s[AVG_SIZE_MAX];
+unsigned int results_zero_p=0;
+
+unsigned int averages_p, averages_max;
+float averages[51];
+
+
+double result_f_in,result_f_zero,result_f;
+unsigned int i;
+unsigned char dp,minus,mode_hiz, mode_avg, mode_autozero, mode_filter;
+
+#define BS(number,bit) (number|=(1<<bit))
+#define BC(number,bit) (number&=(~(1<<bit)))
+#define BT(number,bit) (number ^=(1<<bit))
+#define BV(number,bit) (number &(1<<bit))
+
+#define RELAY1_P        P3OUT
+#define RELAY1_B        3
+#define ADC_ZERO_P      P2OUT
+#define ADC_ZERO_B      5
+
+
+
+
+void main(void) {
+    WDTCTL = WDTPW | WDTHOLD;               // Stop watchdog timer
+    PM5CTL0 &= ~LOCKLPM5;                   // Disable the GPIO power-on default high-impedance mode
+                                            // to activate previously configured port settings
+    P8DIR |= 0x02;
+    P7DIR |= 0x0C;
+    P3DIR |= (1<<RELAY1_B);
+    P2DIR |= (1<<ADC_ZERO_B);
+
+    CSCTL0 = 0xA500;
+    CSCTL3 = 0;
+
+    UCA3CTLW0 = 0x00C0;
+    UCA3BRW = 13;
+    UCA3MCTLW = 0x4901;
+    P6SEL0 = 0x03;
+    P6SEL1 = 0x00;
+
+    UCA2CTLW0 = 0x00C0;
+    UCA2BRW = 13;
+    UCA2MCTLW = 0x4901;
+    P5SEL0 = 0x30;
+    P5SEL1 = 0x00;
+
+
+    UCA1CTLW0 = 0x00C0;
+    UCA1BRW = 16;
+    UCA1MCTLW = 0x0001;
+    P2SEL0 = 0x00;
+    P2SEL1 = 0x40;
+
+    UCA3IE = 0x01;
+    UCA2IE = 0x01;
+    UCA1IE = 0x01;
+
+    TA0CTL = 0x02D0;
+    TA0CCR0 = 1999;
+    BS(TA0CTL,1);
+
+    _BIS_SR(GIE);
+
+    dp = 5;
+    minus = 1;
+    adc_set_zero(1);
+
+    mode_hiz = 0;
+    adc_set_hiz(mode_hiz);
+
+    mode_avg=0;
+    averages_max = 1;
+
+    mode_autozero = 1;
+
+    for(;;) {
+        u1_tx(0x55);
+
+        if (adc_data_flag)
+            {
+            adc_data_flag = 0;
+	    result = adc_get_raw(adc_data);
+            }
+        num = result;
+        minus = 0;
+        if (num<0)
+        {
+            minus = 1;
+            num = num * -1;
+        }
+        if (disp_timer==0)
+            {
+            sprintf (tx_str,"#%d%d%8.8ld\n",minus,dp,num);
+            }
+        u3_tx_s(tx_str);
+
+    }
+}
+
+
+long adc_get_raw (unsigned char * input_data)
+{
+    long res,num;
+
+    unsigned int adc_runup, adc_rundown, adc_rundown_neg;
+    unsigned int coeff_N;
+    adc_rundown_neg = 1;
+    if (input_data[0]&0x40) adc_rundown_neg = 0;
+    adc_runup = ((((unsigned int)(input_data[0]))<<8) | (((unsigned int)(input_data[1]))<<0))&0x3FFF;
+    adc_rundown = (((unsigned int)(input_data[2]))<<8) | (((unsigned int)(input_data[3]))<<0);
+    num = adc_runup;
+    num = num * 100000;
+    num = num + adc_rundown;
+    res = adc_runup;
+    coeff_N = 50000;
+    res = res - 100;
+    res = res * coeff_N;
+    res = res/1;
+    if (adc_rundown_neg==0) res = res + adc_rundown;
+    else res = res - adc_rundown;
+    return res;
+}
+
+
+void adc_set_zero (unsigned char value)
+{
+    if (value==0) BC(ADC_ZERO_P,ADC_ZERO_B);
+    else    BS(ADC_ZERO_P,ADC_ZERO_B);
+
+}
+
+void adc_set_hiz (unsigned char value)
+{
+    if (value==0) BS(RELAY1_P,RELAY1_B);
+    else BC(RELAY1_P,RELAY1_B);
+}
+
+
+#pragma vector=TIMER0_A1_VECTOR
+__interrupt void TMR_A1 (void)
+{
+    BC(TA0CTL,0);
+    TA0CTL = 0;
+    BC(TA0CTL,1);
+    if (adc_data_ptr==4)
+    {
+        adc_data[0] = adc_data_temp[0];
+        adc_data[1] = adc_data_temp[1];
+        adc_data[2] = adc_data_temp[2];
+        adc_data[3] = adc_data_temp[3];
+        adc_data_flag = 1;
+    }
+    adc_data_ptr = 0;
+}
+
+#pragma vector=EUSCI_A1_VECTOR
+__interrupt void Eusci_a1 (void)
+{
+    unsigned char temp;
+    temp = UCA1RXBUF;
+    if (adc_data_ptr<4)
+        adc_data_temp[adc_data_ptr++] = temp;
+    P7OUT ^= 0x08;
+    TA0CTL = 0;
+    TA0R = 0;
+    TA0CTL = 0x02D0;
+    BS(TA0CTL,1);
+}
+
+#pragma vector=EUSCI_A3_VECTOR
+__interrupt void Eusci_a3 (void)
+{
+    unsigned char temp;
+    temp = UCA3RXBUF;
+    if (temp<0x20)
+        {
+        if (u3_rcvd_ptr>0)
+            {
+            u3_rcvd_str[u3_rcvd_ptr] = 0;
+            u3_rcvd_flag = 1;
+            u3_rcvd_ptr = 0;
+            }
+        }
+    else
+        {
+        u3_rcvd_str[u3_rcvd_ptr++] = temp;
+        }
+    if (u3_rcvd_ptr==sizeof(u3_rcvd_str)) u3_rcvd_ptr = 0;
+}
+
+
+#pragma vector=EUSCI_A2_VECTOR
+__interrupt void Eusci_a2 (void)
+{
+    unsigned char temp;
+    temp = UCA2RXBUF;
+    if (temp<0x20)
+        {
+        if (u2_rcvd_ptr>0)
+            {
+            u2_rcvd_str[u2_rcvd_ptr] = 0;
+            u2_rcvd_flag = 1;
+            u2_rcvd_ptr = 0;
+            }
+        }
+    else
+        {
+        u2_rcvd_str[u2_rcvd_ptr++] = temp;
+        }
+    if (u2_rcvd_ptr==sizeof(u2_rcvd_str)) u2_rcvd_ptr = 0;
+}
+
+void u1_tx (unsigned char data)
+{
+    UCA1TXBUF = data;
+    while ((UCA1IFG&0x02)==0);
+}
+
+void u3_tx (unsigned char data)
+{
+    UCA3TXBUF = data;
+    while ((UCA3IFG&0x02)==0);
+}
+
+
+void u3_tx_s (unsigned char * data)
+{
+while (*data!=0)
+    u3_tx(*data++);
+
+}
+
+void u2_tx (unsigned char data)
+{
+    UCA2TXBUF = data;
+    while ((UCA2IFG&0x02)==0);
+}
+
+
+void u2_tx_s (unsigned char * data)
+{
+while (*data!=0)
+    u2_tx(*data++);
+
+}
+

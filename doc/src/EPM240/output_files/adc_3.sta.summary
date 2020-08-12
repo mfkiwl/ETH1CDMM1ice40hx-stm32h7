@@ -1,0 +1,41 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Setup 'cnt[5]'
+Slack : -10.950
+TNS   : -690.192
+
+Type  : Setup 'uart_divider[4]'
+Slack : -6.624
+TNS   : -222.883
+
+Type  : Setup 'mclk'
+Slack : -6.528
+TNS   : -138.464
+
+Type  : Hold 'cnt[5]'
+Slack : -2.977
+TNS   : -2.977
+
+Type  : Hold 'mclk'
+Slack : -1.616
+TNS   : -1.616
+
+Type  : Hold 'uart_divider[4]'
+Slack : -0.037
+TNS   : -0.037
+
+Type  : Minimum Pulse Width 'mclk'
+Slack : -2.289
+TNS   : -2.289
+
+Type  : Minimum Pulse Width 'cnt[5]'
+Slack : 0.234
+TNS   : 0.000
+
+Type  : Minimum Pulse Width 'uart_divider[4]'
+Slack : 0.234
+TNS   : 0.000
+
+------------------------------------------------------------

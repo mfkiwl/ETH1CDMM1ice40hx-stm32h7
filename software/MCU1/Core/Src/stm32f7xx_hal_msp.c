@@ -219,8 +219,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     /**SPI1 GPIO Configuration    
     PA5     ------> SPI1_SCK
     PD7     ------> SPI1_MOSI
-    PG9     ------> SPI1_MISO
-    PG10     ------> SPI1_NSS 
+    PG9     ------> SPI1_MISO 
     */
     GPIO_InitStruct.Pin = FPGA_SPI1_SCK_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -236,16 +235,41 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
     HAL_GPIO_Init(FPGA_SPI1_MOSI_GPIO_Port, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = FPGA_SPI1_MISO_Pin|FPGA_SPI1_NSS_Pin;
+    GPIO_InitStruct.Pin = FPGA_SPI1_MISO_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
-    HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+    HAL_GPIO_Init(FPGA_SPI1_MISO_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN SPI1_MspInit 1 */
 
   /* USER CODE END SPI1_MspInit 1 */
+  }
+  else if(hspi->Instance==SPI5)
+  {
+  /* USER CODE BEGIN SPI5_MspInit 0 */
+
+  /* USER CODE END SPI5_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_SPI5_CLK_ENABLE();
+  
+    __HAL_RCC_GPIOF_CLK_ENABLE();
+    /**SPI5 GPIO Configuration    
+    PF7     ------> SPI5_SCK
+    PF8     ------> SPI5_MISO
+    PF9     ------> SPI5_MOSI 
+    */
+    GPIO_InitStruct.Pin = OCS_SPI5_SCK_Pin|OCS_SPI5_MISO_Pin|OCS_SPI5_MOSI_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF5_SPI5;
+    HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
+
+  /* USER CODE BEGIN SPI5_MspInit 1 */
+
+  /* USER CODE END SPI5_MspInit 1 */
   }
 
 }
@@ -269,18 +293,36 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
     /**SPI1 GPIO Configuration    
     PA5     ------> SPI1_SCK
     PD7     ------> SPI1_MOSI
-    PG9     ------> SPI1_MISO
-    PG10     ------> SPI1_NSS 
+    PG9     ------> SPI1_MISO 
     */
     HAL_GPIO_DeInit(FPGA_SPI1_SCK_GPIO_Port, FPGA_SPI1_SCK_Pin);
 
     HAL_GPIO_DeInit(FPGA_SPI1_MOSI_GPIO_Port, FPGA_SPI1_MOSI_Pin);
 
-    HAL_GPIO_DeInit(GPIOG, FPGA_SPI1_MISO_Pin|FPGA_SPI1_NSS_Pin);
+    HAL_GPIO_DeInit(FPGA_SPI1_MISO_GPIO_Port, FPGA_SPI1_MISO_Pin);
 
   /* USER CODE BEGIN SPI1_MspDeInit 1 */
 
   /* USER CODE END SPI1_MspDeInit 1 */
+  }
+  else if(hspi->Instance==SPI5)
+  {
+  /* USER CODE BEGIN SPI5_MspDeInit 0 */
+
+  /* USER CODE END SPI5_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_SPI5_CLK_DISABLE();
+  
+    /**SPI5 GPIO Configuration    
+    PF7     ------> SPI5_SCK
+    PF8     ------> SPI5_MISO
+    PF9     ------> SPI5_MOSI 
+    */
+    HAL_GPIO_DeInit(GPIOF, OCS_SPI5_SCK_Pin|OCS_SPI5_MISO_Pin|OCS_SPI5_MOSI_Pin);
+
+  /* USER CODE BEGIN SPI5_MspDeInit 1 */
+
+  /* USER CODE END SPI5_MspDeInit 1 */
   }
 
 }
