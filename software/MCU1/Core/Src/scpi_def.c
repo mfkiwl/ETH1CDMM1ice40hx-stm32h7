@@ -45,7 +45,7 @@
 #include "eeprom.h"
 
 extern SDRAM_HandleTypeDef hsdram1;
-
+extern SPI_HandleTypeDef hspi1;
 
 scpi_choice_def_t boolean_select[] =
 {
@@ -60,20 +60,18 @@ scpi_choice_def_t boolean_select[] =
 
 static scpi_result_t TEST_TSQ(scpi_t * context)
 {
-	uint16_t tx_data[1000];
-	uint16_t rx_data[1000];
-
-	for(uint16_t x = 0; x < 1000; x++)
+	uint8_t data[1];
+	uint8_t val_bool;
+	if(!SCPI_ParamBool(context, &val_bool, TRUE))
 	{
-		tx_data[x] = 0x1234;
+		return SCPI_RES_ERR;
 	}
 
-	HAL_SDRAM_Write_16b(&hsdram1, SDRAM_BANK_ADDR+0x1000, tx_data, 1000);
-	//HAL_Delay(100);
-	HAL_SDRAM_Read_16b(&hsdram1, SDRAM_BANK_ADDR+0x1000, rx_data, 1000);
+	val_bool == 1?(data[0] = 0x55):(data[0] = 0x54);
 
-	SCPI_ResultArrayUInt16(context, rx_data, 1000, SCPI_FORMAT_ASCII);
-
+	HAL_GPIO_WritePin(FPGA_SPI1_NSS_GPIO_Port, FPGA_SPI1_NSS_Pin, 0);
+	HAL_SPI_Transmit(&hspi1, data, 1, 1000);
+	HAL_GPIO_WritePin(FPGA_SPI1_NSS_GPIO_Port, FPGA_SPI1_NSS_Pin, 1);
 
 
 	return SCPI_RES_OK;
