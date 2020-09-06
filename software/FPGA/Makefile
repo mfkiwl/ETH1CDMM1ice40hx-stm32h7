@@ -8,7 +8,7 @@ all: $(PROJECT).bin
 	arachne-pnr -q -d 8k -P tq144:4k --post-place-blif $*.place.blif -o $@ -p $(PROJECT).pcf $<
 
 %.blif: %.v
-	yosys -q -p 'synth_ice40 -top top -json top.json -blif $@' top.v
+	yosys -q -p 'synth_ice40 -top top -json top.json -blif $@' top.v spi_mini.v
 
 upload: $(notdir $(PROJECT)).bin
 	iceprog $<
