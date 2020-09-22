@@ -1769,4 +1769,6 @@ Text Label 800  6450 0    50   ~ 0
 100MHZ_OPT
 Wire Wire Line
 	800  6450 1350 6450
+Text Notes 7200 6750 0    50   ~ 0
+Forgot to connect COMP. Temporary connected to 144
 $EndSCHEMATC

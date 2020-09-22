@@ -70,7 +70,7 @@ scpi_choice_def_t boolean_select[] =
 
 static scpi_result_t TEST_TSQ(scpi_t * context)
 {
-	uint8_t data[1];
+/*	uint8_t data[1];
 	uint8_t val_bool;
 	if(!SCPI_ParamBool(context, &val_bool, TRUE))
 	{
@@ -81,7 +81,15 @@ static scpi_result_t TEST_TSQ(scpi_t * context)
 
 	HAL_GPIO_WritePin(FPGA_SPI1_NSS_GPIO_Port, FPGA_SPI1_NSS_Pin, 0);
 	HAL_SPI_Transmit(&hspi1, data, 1, 1000);
-	HAL_GPIO_WritePin(FPGA_SPI1_NSS_GPIO_Port, FPGA_SPI1_NSS_Pin, 1);
+	HAL_GPIO_WritePin(FPGA_SPI1_NSS_GPIO_Port, FPGA_SPI1_NSS_Pin, 1); */
+
+	HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, 0);
+
+	for(int32_t x = 0; x < 100; x++)
+	{
+		HAL_GPIO_TogglePin(TRIG_OUT_GPIO_Port, TRIG_OUT_Pin);
+		HAL_Delay(1);
+	}
 
 
 	return SCPI_RES_OK;

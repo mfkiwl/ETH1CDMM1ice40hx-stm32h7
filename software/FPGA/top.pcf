@@ -1,6 +1,0 @@
-set_io clk 129
-set_io SCK 73
-set_io MOSI 96
-set_io MISO 95
-set_io SSEL 91
-set_io LED 10

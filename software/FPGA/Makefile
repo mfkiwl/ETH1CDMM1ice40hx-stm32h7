@@ -1,4 +1,4 @@
-PROJECT = top
+PROJECT = adc_3
 all: $(PROJECT).bin
 
 %.bin: %.txt
@@ -8,7 +8,7 @@ all: $(PROJECT).bin
 	arachne-pnr -q -d 8k -P tq144:4k --post-place-blif $*.place.blif -o $@ -p $(PROJECT).pcf $<
 
 %.blif: %.v
-	yosys -q -p 'synth_ice40 -top top -json top.json -blif $@' top.v spi_mini.v
+	yosys -q -p 'synth_ice40 -top adc_3 -json adc_3.json -blif $@' adc_3.v pll.v
 
 upload: $(notdir $(PROJECT)).bin
 	iceprog $<

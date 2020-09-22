@@ -160,11 +160,11 @@ scpi_result_t SCPI_TriggerSource(scpi_t* context)
 
 	if(TRIG_OUT == paramTRIG)
 	{
-		HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, 1);
+		HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, 0);
 	}
 	else
 	{
-		HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, 0);
+		HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, 1);
 	}
 
 	return SCPI_RES_OK;

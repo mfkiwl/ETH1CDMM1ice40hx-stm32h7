@@ -8,7 +8,7 @@
 #ifndef INC_EEPROM_H_
 #define INC_EEPROM_H_
 
-#include <bsp.h>
+#include "bsp.h"
 #include "stm32f7xx_hal.h"
 
 #define EEPROM_ADDRESS 0xA0U

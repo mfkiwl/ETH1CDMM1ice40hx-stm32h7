@@ -52,10 +52,19 @@
 #define MCU_SERVICE_SECURITY_ON 1
 #define STRUCT_SIZE 298
 
+
+typedef enum
+{
+	dc_voltage = 1,
+	dc_current = 2,
+	resistance_2w = 3,
+	resistance_4w = 4
+} BSP_DMMFunctionTypeDef;
+
 #pragma pack(push, 1)
 
 // size 196
-struct brd_scpi_info
+struct bsp_scpi_info
 {
 	int8_t manufacturer[SCPI_MANUFACTURER_STRING_LENGTH];
 	int8_t device[SCPI_DEVICE_STRING_LENGTH];
@@ -64,16 +73,23 @@ struct brd_scpi_info
 
 };
 
+// size 5
+struct bsp_dmm
+{
+	uint32_t sample_count;
+	BSP_DMMFunctionTypeDef dmm_function;
+};
+
 // size 1
-struct brd_dhcp
+struct bsp_dhcp
 {
 	scpi_bool_t enable;
 };
 
-typedef struct brd_dhcp brd_dhcp_t;
+typedef struct bsp_dhcp bsp_dhcp_t;
 
 // size 10
-struct brd_trigger
+struct bsp_trigger
 {
 
 	uint8_t slope;
@@ -81,10 +97,10 @@ struct brd_trigger
 	uint8_t source;
 };
 
-typedef struct brd_trigger brd_trigger_t;
+typedef struct bsp_trigger bsp_trigger_t;
 
 // size 40
-struct brd_ip4_lan
+struct bsp_ip4_lan
 {
 	uint8_t ip[4];
 	uint8_t netmask[4];
@@ -95,44 +111,44 @@ struct brd_ip4_lan
 };
 
 // size 50
-struct brd_security
+struct bsp_security
 {
 	scpi_bool_t status;
 	int8_t password[PASSWORD_LENGTH];
 };
 
 // size 1
-struct brd_temperature
+struct bsp_temperature
 {
 	uint8_t unit;
 };
 
-typedef struct brd_ip4_lan brd_ip4_lan_t;
-typedef struct brd_spi_module brd_spi_module_t;
-typedef struct brd_scpi_info brd_scpi_info_t;
-typedef struct brd_security brd_security_t;
-typedef struct brd_source brd_source_t;
-typedef struct brd_temperature brd_temperature_t;
+typedef struct bsp_ip4_lan bsp_ip4_lan_t;
+typedef struct bsp_spi_module bsp_spi_module_t;
+typedef struct bsp_scpi_info bsp_scpi_info_t;
+typedef struct bsp_security bsp_security_t;
+typedef struct bsp_source bsp_source_t;
+typedef struct bsp_temperature bsp_temperature_t;
 
-struct brd_system
+struct bsp_system
 {
-	brd_dhcp_t dhcp;
-	brd_ip4_lan_t ip4_current;
-	brd_ip4_lan_t ip4_static;
-	brd_security_t security;
-	brd_temperature_t temperature;
+	bsp_dhcp_t dhcp;
+	bsp_ip4_lan_t ip4_current;
+	bsp_ip4_lan_t ip4_static;
+	bsp_security_t security;
+	bsp_temperature_t temperature;
 };
 
-typedef struct brd_system brd_system_t;
+typedef struct bsp_system bsp_system_t;
 
-union brd_data
+union bsp_data
 {
 	struct data
 	{
-		brd_scpi_info_t info;
-		brd_system_t system;
+		bsp_scpi_info_t info;
+		bsp_system_t system;
 		scpi_bool_t default_cfg;
-		brd_trigger_t trigger;
+		bsp_trigger_t trigger;
 	}structure;
 
 	uint8_t bytes[STRUCT_SIZE];
@@ -143,27 +159,27 @@ union brd_data
 
 typedef enum
 {
-  BRD_OK       = 0x00U,
-  BRD_ERROR    = 0x01U,
-  BRD_BUSY = 0x02U,
-  BRD_TIMEOUT  = 0x03U,
-  BRD_EEPROM_EMPTY = 0x04U,
-  BRD_EEPROM_MAX_SIZE = 0x05U,
-  BRD_MCU2_TIMEOUT = 0x06U
-} BRD_StatusTypeDef;
+  BSP_OK       = 0x00U,
+  BSP_ERROR    = 0x01U,
+  BSP_BUSY = 0x02U,
+  BSP_TIMEOUT  = 0x03U,
+  BSP_EEPROM_EMPTY = 0x04U,
+  BSP_EEPROM_MAX_SIZE = 0x05U,
+  BSP_MCU2_TIMEOUT = 0x06U
+} BSP_StatusTypeDef;
 
 typedef enum
 {
 	IMM = 0,
 	EXT = 1,
 	BUS = 2
-} BRD_TriggerSrcTypeDef;
+} BSP_TriggerSrcTypeDef;
 
 typedef enum
 {
 	ASCII = 0,
 	REAL = 1
-} BRD_FormatDataSrcTypeDef;
+} BSP_FormatDataSrcTypeDef;
 
 
 #endif /* INC_BSP_H_ */
