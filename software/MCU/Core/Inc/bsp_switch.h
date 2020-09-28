@@ -49,6 +49,8 @@
 #define SWITCH_OFF		0
 #define SWITCH_ON		1
 
+#define HE3621_REL_COUNT 5
+
 void SWITCH_ULN2003A_Control(uint8_t relay, uint8_t state);
 void SWITCH_ULN2003A_ClearAll();
 

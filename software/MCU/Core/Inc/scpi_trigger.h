@@ -27,6 +27,8 @@ scpi_result_t SCPI_TriggerImmediate(scpi_t* context);
 scpi_result_t SCPI_TriggerSource(scpi_t* context);
 scpi_result_t SCPI_TriggerSourceQ(scpi_t* context);
 scpi_result_t SCPI_TriggerOutput(scpi_t* context);
+scpi_result_t SCPI_TriggerSlope(scpi_t* context);
+scpi_result_t SCPI_TriggerSlopeQ(scpi_t* context);
 scpi_result_t SCPI_TriggerOutputSlope(scpi_t* context);
 scpi_result_t SCPI_TriggerOutputSlopeQ(scpi_t* context);
 scpi_result_t SCPI_TRG(scpi_t* context);

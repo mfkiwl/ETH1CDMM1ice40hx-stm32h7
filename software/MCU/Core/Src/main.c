@@ -28,6 +28,7 @@
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef StaticQueue_t osStaticMessageQDef_t;
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
@@ -83,6 +84,17 @@ const osThreadAttr_t MeasurTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal1,
   .stack_size = 1024 * 4
 };
+/* Definitions for QueueTrigger */
+osMessageQueueId_t QueueTriggerHandle;
+uint8_t QueueTriggerBuffer[ 1 * sizeof( uint8_t ) ];
+osStaticMessageQDef_t QueueTriggerControlBlock;
+const osMessageQueueAttr_t QueueTrigger_attributes = {
+  .name = "QueueTrigger",
+  .cb_mem = &QueueTriggerControlBlock,
+  .cb_size = sizeof(QueueTriggerControlBlock),
+  .mq_mem = &QueueTriggerBuffer,
+  .mq_size = sizeof(QueueTriggerBuffer)
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -117,6 +129,7 @@ void StartMeasurTask(void *argument);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+
 
   /* USER CODE END 1 */
 
@@ -170,6 +183,10 @@ int main(void)
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
 
+  /* Create the queue(s) */
+  /* creation of QueueTrigger */
+  QueueTriggerHandle = osMessageQueueNew (1, sizeof(uint8_t), &QueueTrigger_attributes);
+
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
@@ -189,6 +206,8 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   scpi_server_init();
+  osThreadSuspend(TriggerTaskHandle);
+  HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
   /* USER CODE END RTOS_THREADS */
 
   /* Start scheduler */
@@ -542,17 +561,19 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, LED_RED_Pin|LED_GREEN_Pin|LED_BLUE_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(OCS_nSYNC_GPIO_Port, OCS_nSYNC_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(OCS_nSYNC_GPIO_Port, OCS_nSYNC_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, TRIG_OUT_Pin|TRIG_EN_Pin|CXN_REL1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, TRIG_OUT_Pin|CXN_REL1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, EEPROM_WP_Pin|FPGA_IO1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, CXN_REL2_Pin|CXN_REL3_Pin|CXN_REL4_Pin|CXN_REL5_Pin
-                          |FPGA_SPI1_NSS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(EEPROM_WP_GPIO_Port, EEPROM_WP_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOG, CXN_REL2_Pin|CXN_REL3_Pin|CXN_REL4_Pin|CXN_REL5_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, DC_AMP1_MUX_EN_Pin|DC_AMP1_MUX_A1_Pin|DC_AMP1_MUX_A0_Pin|OSC_HV_PROT_Pin, GPIO_PIN_RESET);
@@ -560,6 +581,12 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, AMPL_SEL_Pin|DC_AMP2_MUX_A0_Pin|DC_AMP2_MUX_A1_Pin|DC_AMP2_MUX_EN_Pin
                           |DC_AMP_10MEG_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(FPGA_IO1_GPIO_Port, FPGA_IO1_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(FPGA_SPI1_NSS_GPIO_Port, FPGA_SPI1_NSS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : LED_RED_Pin LED_GREEN_Pin LED_BLUE_Pin DC_AMP1_MUX_EN_Pin
                            DC_AMP1_MUX_A1_Pin DC_AMP1_MUX_A0_Pin OSC_HV_PROT_Pin */
@@ -585,7 +612,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : TRIG_IN_Pin */
   GPIO_InitStruct.Pin = TRIG_IN_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(TRIG_IN_GPIO_Port, &GPIO_InitStruct);
 
@@ -626,6 +653,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(FPGA_IO2_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 15, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 }
 
@@ -745,11 +776,16 @@ void StartLEDTask(void *argument)
 void StartTriggerTask(void *argument)
 {
   /* USER CODE BEGIN StartTriggerTask */
+	uint8_t trigger_status = 0;
   /* Infinite loop */
 
 
   for(;;)
   {
+	  if(osOK == osMessageQueueGet(QueueTriggerHandle, &trigger_status, NULL, 10U))
+	  {
+			HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+	  }
 	  osDelay(pdMS_TO_TICKS(10));
   }
   /* USER CODE END StartTriggerTask */

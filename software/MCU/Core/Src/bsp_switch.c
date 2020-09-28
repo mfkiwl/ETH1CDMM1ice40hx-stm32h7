@@ -28,11 +28,11 @@ void SWITCH_ULN2003A_Control(uint8_t relay, uint8_t state)
 
 void SWITCH_ULN2003A_ClearAll()
 {
-	RELAY_GPIO_WritePin(CXN_REL1_GPIO_Port, CXN_REL1_Pin, state);
-	RELAY_GPIO_WritePin(CXN_REL2_GPIO_Port, CXN_REL2_Pin, state);
-	RELAY_GPIO_WritePin(CXN_REL3_GPIO_Port, CXN_REL3_Pin, state);
-	RELAY_GPIO_WritePin(CXN_REL4_GPIO_Port, CXN_REL4_Pin, state);
-	RELAY_GPIO_WritePin(CXN_REL5_GPIO_Port, CXN_REL5_Pin, state);
+	RELAY_GPIO_WritePin(CXN_REL1_GPIO_Port, CXN_REL1_Pin, SWITCH_OFF);
+	RELAY_GPIO_WritePin(CXN_REL2_GPIO_Port, CXN_REL2_Pin, SWITCH_OFF);
+	RELAY_GPIO_WritePin(CXN_REL3_GPIO_Port, CXN_REL3_Pin, SWITCH_OFF);
+	RELAY_GPIO_WritePin(CXN_REL4_GPIO_Port, CXN_REL4_Pin, SWITCH_OFF);
+	RELAY_GPIO_WritePin(CXN_REL5_GPIO_Port, CXN_REL5_Pin, SWITCH_OFF);
 }
 
 BSP_StatusTypeDef SWITCH_MCZ33996_Control(uint8_t relay, uint8_t state)

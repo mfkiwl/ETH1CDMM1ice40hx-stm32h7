@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name 2_adc-eagle-import)(type Legacy)(uri ${KIPRJMOD}/2_adc-eagle-import.lib)(options "")(descr ""))
-)

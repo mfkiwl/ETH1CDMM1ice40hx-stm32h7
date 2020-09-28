@@ -10,8 +10,11 @@
 
 #include "main.h"
 #include "scpi_trigger.h"
+#include "cmsis_os.h"
 
 extern scpi_choice_def_t boolean_select[];
+
+extern osThreadId_t TriggerTaskHandle;
 
  scpi_choice_def_t trigger_source_select[] =
  {
@@ -29,15 +32,16 @@ extern scpi_choice_def_t boolean_select[];
 		 SCPI_CHOICE_LIST_END
  };
 
+
  /*
-  * TRIGger:DELay <numeric_value> [MS|S]
+  * TRIGger:DELay <numeric_value>
   *
   * @INFO:
   * Sets the trigger delay time.
   *
   * @PARAMETERS:
   * 				<numeric_value> :
-  *									numeric from 0 to 1000 (s)
+  *									numeric from 0 to 1000000 (ms)
   *									MINimum 0 (s)
   *									MAXimum 1000 (s)
   *
@@ -161,10 +165,14 @@ scpi_result_t SCPI_TriggerSource(scpi_t* context)
 	if(TRIG_OUT == paramTRIG)
 	{
 		HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, 0);
+		HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+		osThreadSuspend(TriggerTaskHandle);
 	}
 	else
 	{
 		HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, 1);
+		HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+		osThreadResume(TriggerTaskHandle);
 	}
 
 	return SCPI_RES_OK;
@@ -192,7 +200,7 @@ scpi_result_t SCPI_TriggerSourceQ(scpi_t* context)
 }
 
 /*
- * TRIGger:OUTPut
+ * TRIGger:OUTput
  *
  * @INFO:
  * Output a TTL-compatible square pulse with the specified edge (TRIG:OUTP:SLOP command) is to output. The trigger pulse time is 5ms.
@@ -209,11 +217,75 @@ scpi_result_t SCPI_TriggerOutput(scpi_t* context)
 		return SCPI_RES_ERR;
 	}
 
+	HAL_GPIO_TogglePin(TRIG_OUT_GPIO_Port, TRIG_OUT_Pin);
+	HAL_Delay(board.structure.trigger.delay);
+	HAL_GPIO_TogglePin(TRIG_OUT_GPIO_Port, TRIG_OUT_Pin);
+
 	return SCPI_RES_OK;
 }
 
 /*
- * TRIGger:OUTPut:SLOPe {POSitive|NEGative}
+ * TRIGger:SLOPe {POSitive|NEGative}
+ *
+ * @INFO:
+ * Select a rising or falling edge for the “trigger out” signal.
+ *
+ * @PARAMETERS:
+ * 				POSitive :	rising edge
+ * 				NEGative :	falling edge
+ *
+ */
+
+scpi_result_t SCPI_TriggerSlope(scpi_t* context)
+{
+	int32_t paramSLOPE;
+	GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+	if(!SCPI_ParamChoice(context, trigger_slope_select, &paramSLOPE, TRUE))
+	{
+		return SCPI_RES_ERR;
+	}
+
+
+	HAL_GPIO_DeInit(TRIG_IN_GPIO_Port, &GPIO_InitStruct);
+	GPIO_InitStruct.Pin = TRIG_IN_Pin;
+
+	switch(paramSLOPE)
+	{
+		case SLOPE_POS: GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING; break;
+		case SLOPE_NEG: GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING; break;
+	}
+
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	HAL_GPIO_Init(TRIG_IN_GPIO_Port, &GPIO_InitStruct);
+
+	board.structure.trigger.in_slope = paramSLOPE;
+
+	return SCPI_RES_OK;
+}
+
+/*
+ * TRIGger:SLOPe?
+ *
+ * @INFO:
+ * Query trigger input slope edge. Returns POS or NEG.
+ *
+ */
+
+scpi_result_t SCPI_TriggerSlopeQ(scpi_t* context)
+{
+
+	switch(board.structure.trigger.in_slope)
+	{
+		case SLOPE_POS: SCPI_ResultCharacters(context, "POS", 3); break;
+		case SLOPE_NEG: SCPI_ResultCharacters(context, "NEG", 3); break;
+	}
+
+	return SCPI_RES_OK;
+}
+
+/*
+ * TRIGger:OUTput:SLOPe {POSitive|NEGative}
  *
  * @INFO:
  * Select a rising or falling edge for the “trigger out” signal.
@@ -239,13 +311,13 @@ scpi_result_t SCPI_TriggerOutputSlope(scpi_t* context)
 		case SLOPE_NEG: HAL_GPIO_WritePin(TRIG_OUT_GPIO_Port, TRIG_OUT_Pin, 1); break;
 	}
 
-	board.structure.trigger.slope = paramSLOPE;
+	board.structure.trigger.out_slope = paramSLOPE;
 
 	return SCPI_RES_OK;
 }
 
 /*
- * TRIGger:OUTPut:SLOPe?
+ * TRIGger:OUTput:SLOPe?
  *
  * @INFO:
  * Query trigger output slope edge. Returns POS or NEG.
@@ -255,7 +327,7 @@ scpi_result_t SCPI_TriggerOutputSlope(scpi_t* context)
 scpi_result_t SCPI_TriggerOutputSlopeQ(scpi_t* context)
 {
 
-	switch(board.structure.trigger.slope)
+	switch(board.structure.trigger.out_slope)
 	{
 		case SLOPE_POS: SCPI_ResultCharacters(context, "POS", 3); break;
 		case SLOPE_NEG: SCPI_ResultCharacters(context, "NEG", 3); break;

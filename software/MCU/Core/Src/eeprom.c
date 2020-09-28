@@ -140,7 +140,7 @@ BSP_StatusTypeDef EEPROM_WriteValues()
 	return BSP_OK;
 }
 
-BSP_StatusTypeDef EEPROM_Read(union brd_data *union_data, uint16_t size)
+BSP_StatusTypeDef EEPROM_Read(union bsp_data *union_data, uint16_t size)
 {
 	uint8_t rx_data;
 	uint8_t tx_data = 0xFF;
@@ -191,5 +191,27 @@ BSP_StatusTypeDef EEPROM_Read(union brd_data *union_data, uint16_t size)
 		}
 
 	return BSP_OK;
+}
 
+BSP_StatusTypeDef EEPROM_Status()
+{
+	uint8_t rx_data;
+	uint8_t tx_data = 0xFF;
+	BSP_StatusTypeDef i2c_status;
+
+	i2c_status = HAL_I2C_Master_Transmit(&hi2c4, EEPROM_ADDRESS | EEPROM_B0 | EEPROM_B1, &tx_data, 1, 100);
+	if(BSP_OK != i2c_status)
+	{
+		return i2c_status;
+	}
+	i2c_status = HAL_I2C_Master_Receive(&hi2c4, EEPROM_ADDRESS | EEPROM_B0 | EEPROM_B1, &rx_data, 1, 100);
+	if(BSP_OK != i2c_status)
+	{
+		return i2c_status;
+	}
+
+	if(EEPROM_WRITE_STATE != rx_data)
+	{
+		return BSP_EEPROM_EMPTY;
+	}
 }

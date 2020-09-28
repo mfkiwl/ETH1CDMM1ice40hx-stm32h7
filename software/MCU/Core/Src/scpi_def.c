@@ -180,9 +180,12 @@ const scpi_command_t scpi_commands[] = {
 	{.pattern = "TRIGger[:IMMediate]", .callback = SCPI_TriggerImmediate,},
 	{.pattern = "TRIGger:SOURce", .callback = SCPI_TriggerSource,},
 	{.pattern = "TRIGger:SOURce?", .callback = SCPI_TriggerSourceQ,},
-	{.pattern = "TRIGger:OUTPut", .callback = SCPI_TriggerOutput,},
-	{.pattern = "TRIGger:OUTPut:SLOPe", .callback = SCPI_TriggerOutputSlope,},
-	{.pattern = "TRIGger:OUTPut:SLOPe?", .callback = SCPI_TriggerOutputSlopeQ,},
+	{.pattern = "TRIGger:SLOPe", .callback = SCPI_TriggerSlope,},
+	{.pattern = "TRIGger:SLOPe?", .callback = SCPI_TriggerSlopeQ,},
+
+	{.pattern = "TRIGger:OUTput", .callback = SCPI_TriggerOutput,},
+	{.pattern = "TRIGger:OUTput:SLOPe", .callback = SCPI_TriggerOutputSlope,},
+	{.pattern = "TRIGger:OUTput:SLOPe?", .callback = SCPI_TriggerOutputSlopeQ,},
 	{.pattern = "*TRG", .callback = SCPI_TRG,},
 
 	// scpi_measure.c

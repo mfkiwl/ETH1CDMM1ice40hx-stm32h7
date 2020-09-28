@@ -78,6 +78,7 @@ void Error_Handler(void);
 #define FPGA_SPI1_SCK_GPIO_Port GPIOA
 #define TRIG_IN_Pin GPIO_PIN_12
 #define TRIG_IN_GPIO_Port GPIOB
+#define TRIG_IN_EXTI_IRQn EXTI15_10_IRQn
 #define TRIG_OUT_Pin GPIO_PIN_13
 #define TRIG_OUT_GPIO_Port GPIOB
 #define TRIG_EN_Pin GPIO_PIN_14

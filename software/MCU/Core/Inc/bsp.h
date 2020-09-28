@@ -15,7 +15,7 @@
 #define SCPI_DEVICE_STRING_LENGTH 49
 #define SCPI_SERIALNUMBER_STRING_LENGTH 49
 #define SCPI_SOFTWAREVERSION_STRING_LENGTH 49
-#define HOSTNAME_LENGTH 20
+
 #define PASSWORD_LENGTH 49
 #define PASSWORD "ETH1CDMM1"
 
@@ -41,12 +41,13 @@
 #define MAC_4 0x00
 #define MAC_5 0x00
 
+#define HOSTNAME_LENGTH 20
 #define HOSTNAME "ETH1CDMM1"
 
 #define TCPIP_DEFAULT_PORT 2000
 
-#define MCU_DEFAULT_OFF 0
-#define MCU_DEFAULT_ON 1
+#define MCU_DEFAULT_ON 0
+#define MCU_DEFAULT_OFF 1
 
 #define MCU_SERVICE_SECURITY_OFF 0
 #define MCU_SERVICE_SECURITY_ON 1
@@ -92,7 +93,8 @@ typedef struct bsp_dhcp bsp_dhcp_t;
 struct bsp_trigger
 {
 
-	uint8_t slope;
+	uint8_t out_slope;
+	uint8_t in_slope;
 	double delay;
 	uint8_t source;
 };
@@ -102,7 +104,7 @@ typedef struct bsp_trigger bsp_trigger_t;
 // size 40
 struct bsp_ip4_lan
 {
-	uint8_t ip[4];
+	uint8_t address[4];
 	uint8_t netmask[4];
 	uint8_t gateway[4];
 	uint8_t MAC[6];

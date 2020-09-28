@@ -207,10 +207,10 @@ scpi_result_t SCPI_SystemCommunicateLANIPAddress(scpi_t * context)
 	{
 	case NET_STR_OK:
 	{
-		board.structure.system.ip4_current.ip[0] = numb[0];
-		board.structure.system.ip4_current.ip[1] = numb[1];
-		board.structure.system.ip4_current.ip[2] = numb[2];
-		board.structure.system.ip4_current.ip[3] = numb[3];
+		board.structure.system.ip4_current.address[0] = numb[0];
+		board.structure.system.ip4_current.address[1] = numb[1];
+		board.structure.system.ip4_current.address[2] = numb[2];
+		board.structure.system.ip4_current.address[3] = numb[3];
 	}break;
 	case NET_STR_WRONG_FORMAT: SCPI_ErrorPush(context, SCPI_ERROR_DATA_TYPE_ERROR); break;
 	case NET_STR_WRONG_NUMBER: SCPI_ErrorPush(context, SCPI_ERROR_NUMERIC_DATA_NOT_ALLOWED); break;
@@ -246,17 +246,17 @@ scpi_result_t SCPI_SystemCommunicateLANIPAddressQ(scpi_t * context)
 	}
 	if(CURRENT == value)
 	{
-		sprintf(str, "%d.%d.%d.%d", board.structure.system.ip4_current.ip[0],
-									board.structure.system.ip4_current.ip[1],
-									board.structure.system.ip4_current.ip[2],
-									board.structure.system.ip4_current.ip[3]);
+		sprintf(str, "%d.%d.%d.%d", board.structure.system.ip4_current.address[0],
+									board.structure.system.ip4_current.address[1],
+									board.structure.system.ip4_current.address[2],
+									board.structure.system.ip4_current.address[3]);
 	}
 	else if(STATIC == value)
 	{
-		sprintf(str, "%d.%d.%d.%d", board.structure.system.ip4_static.ip[0],
-									board.structure.system.ip4_static.ip[1],
-									board.structure.system.ip4_static.ip[2],
-									board.structure.system.ip4_static.ip[3]);
+		sprintf(str, "%d.%d.%d.%d", board.structure.system.ip4_static.address[0],
+									board.structure.system.ip4_static.address[1],
+									board.structure.system.ip4_static.address[2],
+									board.structure.system.ip4_static.address[3]);
 	}
 	SCPI_ResultMnemonic(context, (char*)str);
 	return SCPI_RES_OK;
