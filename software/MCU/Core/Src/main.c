@@ -24,7 +24,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "bsp.h"
+#include "bsp_init.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -164,8 +165,8 @@ int main(void)
   MX_SPI5_Init();
   MX_USART2_Init();
   /* USER CODE BEGIN 2 */
+  BSP_Init();
   MX_LWIP_Init();
-
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -206,8 +207,9 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   scpi_server_init();
+
   osThreadSuspend(TriggerTaskHandle);
-  HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+
   /* USER CODE END RTOS_THREADS */
 
   /* Start scheduler */
@@ -786,7 +788,7 @@ void StartTriggerTask(void *argument)
 	  {
 			HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 	  }
-	  osDelay(pdMS_TO_TICKS(10));
+	  osDelay(pdMS_TO_TICKS(2));
   }
   /* USER CODE END StartTriggerTask */
 }

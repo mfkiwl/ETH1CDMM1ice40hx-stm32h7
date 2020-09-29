@@ -11,6 +11,31 @@
 #include "stm32f7xx_hal.h"
 #include "scpi/scpi.h"
 
+
+#define SDRAM_BANK_ADDR                 ((uint32_t)0xD0000000)
+#define SDRAM_MEMORY_SIZE           	(uint32_t)0x800000
+
+/* #define SDRAM_MEMORY_WIDTH            FMC_SDRAM_MEM_BUS_WIDTH_8 */
+#define SDRAM_MEMORY_WIDTH            FMC_SDRAM_MEM_BUS_WIDTH_16
+
+/* #define SDCLOCK_PERIOD                   FMC_SDRAM_CLOCK_PERIOD_2 */
+#define SDCLOCK_PERIOD                FMC_SDRAM_CLOCK_PERIOD_3
+
+#define SDRAM_TIMEOUT     ((uint32_t)0xFFFF)
+
+#define SDRAM_MODEREG_BURST_LENGTH_1             ((uint16_t)0x0000)
+#define SDRAM_MODEREG_BURST_LENGTH_2             ((uint16_t)0x0001)
+#define SDRAM_MODEREG_BURST_LENGTH_4             ((uint16_t)0x0002)
+#define SDRAM_MODEREG_BURST_LENGTH_8             ((uint16_t)0x0004)
+#define SDRAM_MODEREG_BURST_TYPE_SEQUENTIAL      ((uint16_t)0x0000)
+#define SDRAM_MODEREG_BURST_TYPE_INTERLEAVED     ((uint16_t)0x0008)
+#define SDRAM_MODEREG_CAS_LATENCY_2              ((uint16_t)0x0020)
+#define SDRAM_MODEREG_CAS_LATENCY_3              ((uint16_t)0x0030)
+#define SDRAM_MODEREG_OPERATING_MODE_STANDARD    ((uint16_t)0x0000)
+#define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000)
+#define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)
+#define REFRESH_COUNT       					 ((uint32_t)0x056A)   /* SDRAM refresh counter (90MHz SDRAM clock) */
+
 #define SCPI_MANUFACTURER_STRING_LENGTH 49
 #define SCPI_DEVICE_STRING_LENGTH 49
 #define SCPI_SERIALNUMBER_STRING_LENGTH 49
@@ -51,16 +76,17 @@
 
 #define MCU_SERVICE_SECURITY_OFF 0
 #define MCU_SERVICE_SECURITY_ON 1
-#define STRUCT_SIZE 298
+
+#define STRUCT_SIZE 285
 
 
-typedef enum
+enum dmm_function_enum
 {
 	dc_voltage = 1,
 	dc_current = 2,
 	resistance_2w = 3,
 	resistance_4w = 4
-} BSP_DMMFunctionTypeDef;
+};
 
 #pragma pack(push, 1)
 
@@ -78,21 +104,14 @@ struct bsp_scpi_info
 struct bsp_dmm
 {
 	uint32_t sample_count;
-	BSP_DMMFunctionTypeDef dmm_function;
+	uint8_t function;
 };
 
-// size 1
-struct bsp_dhcp
-{
-	scpi_bool_t enable;
-};
+typedef struct bsp_dmm bsp_dmm_t;
 
-typedef struct bsp_dhcp bsp_dhcp_t;
-
-// size 10
+// size 11
 struct bsp_trigger
 {
-
 	uint8_t out_slope;
 	uint8_t in_slope;
 	double delay;
@@ -112,10 +131,9 @@ struct bsp_ip4_lan
 	uint16_t port;
 };
 
-// size 50
+// size 49
 struct bsp_security
 {
-	scpi_bool_t status;
 	int8_t password[PASSWORD_LENGTH];
 };
 
@@ -126,36 +144,35 @@ struct bsp_temperature
 };
 
 typedef struct bsp_ip4_lan bsp_ip4_lan_t;
-typedef struct bsp_spi_module bsp_spi_module_t;
 typedef struct bsp_scpi_info bsp_scpi_info_t;
 typedef struct bsp_security bsp_security_t;
-typedef struct bsp_source bsp_source_t;
 typedef struct bsp_temperature bsp_temperature_t;
 
-struct bsp_system
-{
-	bsp_dhcp_t dhcp;
-	bsp_ip4_lan_t ip4_current;
-	bsp_ip4_lan_t ip4_static;
-	bsp_security_t security;
-	bsp_temperature_t temperature;
-};
 
-typedef struct bsp_system bsp_system_t;
 
 union bsp_data
 {
-	struct data
+	struct bsp_config
 	{
-		bsp_scpi_info_t info;
-		bsp_system_t system;
-		scpi_bool_t default_cfg;
-		bsp_trigger_t trigger;
+		bsp_scpi_info_t info; // size 196
+		bsp_ip4_lan_t ip4; // size 40
+		bsp_security_t security; // 49
 	}structure;
 
 	uint8_t bytes[STRUCT_SIZE];
 
-}board, default_board;
+}board_static, default_board_static;
+
+struct bsp_status
+{
+	uint8_t security_status;
+	bsp_temperature_t temperature;
+	bsp_trigger_t trigger;
+	uint8_t default_cfg;
+	bsp_dmm_t dmm;
+	bsp_ip4_lan_t ip4;
+
+}board_current;
 
 #pragma pack(pop)
 
@@ -170,12 +187,19 @@ typedef enum
   BSP_MCU2_TIMEOUT = 0x06U
 } BSP_StatusTypeDef;
 
-typedef enum
+enum trigger_enum
 {
-	IMM = 0,
-	EXT = 1,
-	BUS = 2
-} BSP_TriggerSrcTypeDef;
+	IMM = 1,
+	EXT = 2,
+	BUS = 3,
+	OUT = 4
+};
+
+enum trigger_slope_enum
+{
+	POS = 1,
+	NEG = 2
+};
 
 typedef enum
 {

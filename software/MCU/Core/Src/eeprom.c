@@ -31,7 +31,7 @@ BSP_StatusTypeDef EEPROM_WriteDefaultValues()
 		for (uint16_t j = 0; j < limit; j++)
 		{
 			tx_data[0] = j;
-			tx_data[1] = default_board.bytes[i*EEPROM_BLOCK_SIZE+j];
+			tx_data[1] = default_board_static.bytes[i*EEPROM_BLOCK_SIZE+j];
 
 			i2c_status = HAL_I2C_Master_Transmit(&hi2c4, EEPROM_ADDRESS+i, tx_data, 2, 1000);
 			if(BSP_OK != i2c_status)
@@ -101,9 +101,6 @@ BSP_StatusTypeDef EEPROM_WriteValues()
 	uint16_t limit = STRUCT_SIZE;
 	uint8_t blocks = (uint8_t)ceil((float)STRUCT_SIZE/(float)EEPROM_BLOCK_COUNT);
 
-	// enable protection
-	board.structure.system.security.status = 1;
-
 	HAL_GPIO_WritePin(EEPROM_WP_GPIO_Port, EEPROM_WP_Pin, 0);
 	HAL_Delay(10);
 
@@ -113,7 +110,7 @@ BSP_StatusTypeDef EEPROM_WriteValues()
 		for (uint16_t j = 0; j < limit; j++)
 		{
 			tx_data[0] = j;
-			tx_data[1] = board.bytes[i*EEPROM_BLOCK_SIZE+j];
+			tx_data[1] = board_static.bytes[i*EEPROM_BLOCK_SIZE+j];
 
 			i2c_status = HAL_I2C_Master_Transmit(&hi2c4, EEPROM_ADDRESS+i, tx_data, 2, 1000);
 			if(BSP_OK != i2c_status)

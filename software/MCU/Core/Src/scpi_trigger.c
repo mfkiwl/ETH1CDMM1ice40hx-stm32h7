@@ -62,8 +62,8 @@ scpi_result_t SCPI_TriggerDelay(scpi_t* context)
 	{
 		switch(paramDELAY.content.tag)
 		{
-		case SCPI_NUM_MIN: board.structure.trigger.delay = 0; break;
-		case SCPI_NUM_MAX: board.structure.trigger.delay = 1000; break;
+		case SCPI_NUM_MIN: board_current.trigger.delay = 0; break;
+		case SCPI_NUM_MAX: board_current.trigger.delay = 1000; break;
 		default: SCPI_ErrorPush(context, SCPI_ERROR_ILLEGAL_PARAMETER_VALUE); return SCPI_RES_ERR;
 		}
 	}
@@ -78,13 +78,13 @@ scpi_result_t SCPI_TriggerDelay(scpi_t* context)
 			}
 			else
 			{
-				board.structure.trigger.delay = paramDELAY.content.value;
+				board_current.trigger.delay = paramDELAY.content.value;
 				return SCPI_RES_OK;
 			}
 		}
 		else if (SCPI_UNIT_SECOND == paramDELAY.unit)
 		{
-			board.structure.trigger.delay = paramDELAY.content.value;
+			board_current.trigger.delay = paramDELAY.content.value;
 			return SCPI_RES_OK;
 		}
 		else
@@ -107,7 +107,7 @@ scpi_result_t SCPI_TriggerDelay(scpi_t* context)
 
 scpi_result_t SCPI_TriggerDelayQ(scpi_t* context)
 {
-	SCPI_ResultDouble(context, board.structure.trigger.delay);
+	SCPI_ResultDouble(context, board_current.trigger.delay);
 	return SCPI_RES_OK;
 }
 
@@ -122,10 +122,10 @@ scpi_result_t SCPI_TriggerDelayQ(scpi_t* context)
 scpi_result_t SCPI_TriggerImmediate(scpi_t* context)
 {
 
-	if(TRIG_OUT != board.structure.trigger.source)
+	if(TRIG_OUT != board_current.trigger.source)
 	{
 		HAL_GPIO_TogglePin(TRIG_OUT_GPIO_Port, TRIG_OUT_Pin);
-		HAL_Delay(board.structure.trigger.delay);
+		HAL_Delay(board_current.trigger.delay);
 		HAL_GPIO_TogglePin(TRIG_OUT_GPIO_Port, TRIG_OUT_Pin);
 	}
 	else
@@ -138,7 +138,7 @@ scpi_result_t SCPI_TriggerImmediate(scpi_t* context)
 }
 
 /*
- * TRIGger:SOURce {BUS|EXTernal|INTernal|OUTput}
+ * TRIGger:SOURce {IMMediate|EXTernal|BUS|OUTput}
  *
  * @INFO:
  * Sets the trigger mode.
@@ -160,18 +160,16 @@ scpi_result_t SCPI_TriggerSource(scpi_t* context)
 		return SCPI_RES_ERR;
 	}
 
-	board.structure.trigger.source = paramTRIG;
+	board_current.trigger.source = paramTRIG;
 
 	if(TRIG_OUT == paramTRIG)
 	{
 		HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, 0);
-		HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
 		osThreadSuspend(TriggerTaskHandle);
 	}
 	else
 	{
 		HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, 1);
-		HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 		osThreadResume(TriggerTaskHandle);
 	}
 
@@ -189,7 +187,7 @@ scpi_result_t SCPI_TriggerSource(scpi_t* context)
 scpi_result_t SCPI_TriggerSourceQ(scpi_t* context)
 {
 
-	switch(board.structure.trigger.source)
+	switch(board_current.trigger.source)
 	{
 		case TRIG_BUS: SCPI_ResultCharacters(context, "BUS", 3); break;
 		case TRIG_EXT: SCPI_ResultCharacters(context, "EXT", 3); break;
@@ -211,14 +209,14 @@ scpi_result_t SCPI_TriggerSourceQ(scpi_t* context)
 scpi_result_t SCPI_TriggerOutput(scpi_t* context)
 {
 
-	if(TRIG_OUT != board.structure.trigger.source)
+	if(TRIG_OUT != board_current.trigger.source)
 	{
 		SCPI_ErrorPush(context, SCPI_ERROR_TRIGGER_IGNORED);
 		return SCPI_RES_ERR;
 	}
 
 	HAL_GPIO_TogglePin(TRIG_OUT_GPIO_Port, TRIG_OUT_Pin);
-	HAL_Delay(board.structure.trigger.delay);
+	HAL_Delay(board_current.trigger.delay);
 	HAL_GPIO_TogglePin(TRIG_OUT_GPIO_Port, TRIG_OUT_Pin);
 
 	return SCPI_RES_OK;
@@ -259,7 +257,7 @@ scpi_result_t SCPI_TriggerSlope(scpi_t* context)
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	HAL_GPIO_Init(TRIG_IN_GPIO_Port, &GPIO_InitStruct);
 
-	board.structure.trigger.in_slope = paramSLOPE;
+	board_current.trigger.in_slope = paramSLOPE;
 
 	return SCPI_RES_OK;
 }
@@ -275,7 +273,7 @@ scpi_result_t SCPI_TriggerSlope(scpi_t* context)
 scpi_result_t SCPI_TriggerSlopeQ(scpi_t* context)
 {
 
-	switch(board.structure.trigger.in_slope)
+	switch(board_current.trigger.in_slope)
 	{
 		case SLOPE_POS: SCPI_ResultCharacters(context, "POS", 3); break;
 		case SLOPE_NEG: SCPI_ResultCharacters(context, "NEG", 3); break;
@@ -311,7 +309,7 @@ scpi_result_t SCPI_TriggerOutputSlope(scpi_t* context)
 		case SLOPE_NEG: HAL_GPIO_WritePin(TRIG_OUT_GPIO_Port, TRIG_OUT_Pin, 1); break;
 	}
 
-	board.structure.trigger.out_slope = paramSLOPE;
+	board_current.trigger.out_slope = paramSLOPE;
 
 	return SCPI_RES_OK;
 }
@@ -327,7 +325,7 @@ scpi_result_t SCPI_TriggerOutputSlope(scpi_t* context)
 scpi_result_t SCPI_TriggerOutputSlopeQ(scpi_t* context)
 {
 
-	switch(board.structure.trigger.out_slope)
+	switch(board_current.trigger.out_slope)
 	{
 		case SLOPE_POS: SCPI_ResultCharacters(context, "POS", 3); break;
 		case SLOPE_NEG: SCPI_ResultCharacters(context, "NEG", 3); break;
@@ -347,7 +345,7 @@ scpi_result_t SCPI_TriggerOutputSlopeQ(scpi_t* context)
 scpi_result_t SCPI_TRG(scpi_t* context)
 {
 
-	if(TRIG_BUS != board.structure.trigger.source)
+	if(TRIG_BUS != board_current.trigger.source)
 	{
 		SCPI_ErrorPush(context, SCPI_ERROR_TRIGGER_IGNORED);
 		return SCPI_RES_ERR;

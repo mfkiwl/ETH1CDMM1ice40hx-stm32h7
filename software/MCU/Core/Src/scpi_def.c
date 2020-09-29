@@ -83,13 +83,7 @@ static scpi_result_t TEST_TSQ(scpi_t * context)
 	HAL_SPI_Transmit(&hspi1, data, 1, 1000);
 	HAL_GPIO_WritePin(FPGA_SPI1_NSS_GPIO_Port, FPGA_SPI1_NSS_Pin, 1); */
 
-	HAL_GPIO_WritePin(TRIG_EN_GPIO_Port, TRIG_EN_Pin, 0);
-
-	for(int32_t x = 0; x < 100; x++)
-	{
-		HAL_GPIO_TogglePin(TRIG_OUT_GPIO_Port, TRIG_OUT_Pin);
-		HAL_Delay(1);
-	}
+	EEPROM_Status();
 
 
 	return SCPI_RES_OK;
@@ -152,8 +146,6 @@ const scpi_command_t scpi_commands[] = {
     {.pattern = "SYSTem:VERSion?", .callback = SCPI_SystemVersionQ,},
 
 	//scpi_system.c
-	{.pattern = "SYSTem:COMMunicate:LAN:DHCP", .callback = SCPI_SystemCommunicateLANDHCP,},
-	{.pattern = "SYSTem:COMMunicate:LAN:DHCP?", .callback = SCPI_SystemCommunicateLANDHCPQ,},
 	{.pattern = "SYSTem:COMMunicate:LAN:IPADdress", .callback = SCPI_SystemCommunicateLANIPAddress,},
 	{.pattern = "SYSTem:COMMunicate:LAN:IPADdress?", .callback = SCPI_SystemCommunicateLANIPAddressQ,},
 	{.pattern = "SYSTem:COMMunicate:LAN:SMASk", .callback = SCPI_SystemCommunicateLANIPSmask,},

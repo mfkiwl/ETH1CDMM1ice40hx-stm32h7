@@ -12,8 +12,8 @@
 
 #define SECURITY_ON 1
 #define SECURITY_OFF 0
-#define CURRENT 0
-#define STATIC 1
+#define CURRENT 1
+#define STATIC 2
 #define NET_STR_WRONG_FORMAT 1
 #define NET_STR_WRONG_NUMBER 2
 #define NET_STR_OK 0
@@ -39,8 +39,6 @@ enum e_eeprom_states
 	EEPROM_DEFAULT,
 };
 
-scpi_result_t SCPI_SystemCommunicateLANDHCP(scpi_t * context);
-scpi_result_t SCPI_SystemCommunicateLANDHCPQ(scpi_t * context);
 scpi_result_t SCPI_SystemCommunicateLANIPAddress(scpi_t * context);
 scpi_result_t SCPI_SystemCommunicateLANIPAddressQ(scpi_t * context);
 scpi_result_t SCPI_SystemCommunicateLANIPSmask(scpi_t * context);
