@@ -161,7 +161,7 @@ union bsp_data
 
 	uint8_t bytes[STRUCT_SIZE];
 
-}board_static, default_board_static;
+}board_static, default_board_static, test;
 
 struct bsp_status
 {
@@ -184,7 +184,10 @@ typedef enum
   BSP_TIMEOUT  = 0x03U,
   BSP_EEPROM_EMPTY = 0x04U,
   BSP_EEPROM_MAX_SIZE = 0x05U,
-  BSP_MCU2_TIMEOUT = 0x06U
+  BSP_EEPROM_NO_CONNECTION = 0x06U,
+  BSP_EEPROM_WRITE_ERROR = 0x07U,
+  BSP_EEPROM_READ_ERROR = 0x08U
+
 } BSP_StatusTypeDef;
 
 enum trigger_enum

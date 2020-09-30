@@ -566,7 +566,25 @@ scpi_result_t SCPI_SystemCommunicationLanUpdate(scpi_t * context)
 		return SCPI_ERROR_SERVICE_MODE_SECURE;
 	}
 
-	EEPROM_WriteValues();
+	board_static.structure.ip4.address[0] = board_current.ip4.address[0];
+	board_static.structure.ip4.address[1] = board_current.ip4.address[1];
+	board_static.structure.ip4.address[2] = board_current.ip4.address[2];
+	board_static.structure.ip4.address[3] = board_current.ip4.address[3];
+
+	board_static.structure.ip4.gateway[0] = board_current.ip4.gateway[0];
+	board_static.structure.ip4.gateway[1] = board_current.ip4.gateway[1];
+	board_static.structure.ip4.gateway[2] = board_current.ip4.gateway[2];
+	board_static.structure.ip4.gateway[3] = board_current.ip4.gateway[3];
+
+	board_static.structure.ip4.netmask[0] = board_current.ip4.netmask[0];
+	board_static.structure.ip4.netmask[1] = board_current.ip4.netmask[1];
+	board_static.structure.ip4.netmask[2] = board_current.ip4.netmask[2];
+	board_static.structure.ip4.netmask[3] = board_current.ip4.netmask[3];
+
+	board_static.structure.ip4.port = board_current.ip4.port;
+	strncpy(board_static.structure.ip4.hostname, board_current.ip4.hostname, HOSTNAME_LENGTH);
+
+	EEPROM_Write(board_static.bytes,STRUCT_SIZE);
 
 	return SCPI_RES_OK;
 }
@@ -759,7 +777,7 @@ scpi_result_t SCPI_SystemServiceEEPROM(scpi_t * context)
 	switch(paramEEPROM)
 	{
 		case EEPROM_RESET:EEPROM_Reset();break;
-		case EEPROM_DEFAULT:EEPROM_WriteDefaultValues();break;
+		case EEPROM_DEFAULT:EEPROM_Write(default_board_static.bytes, STRUCT_SIZE);break;
 	}
 
 	return SCPI_RES_OK;
@@ -816,5 +834,5 @@ scpi_result_t SCPI_SystemServiceID(scpi_t * context)
 	strncpy(board_static.structure.info.software_version, buffer, SCPI_SOFTWAREVERSION_STRING_LENGTH);
 	strncpy(board_static.structure.info.serial_number, buffer, SCPI_SERIALNUMBER_STRING_LENGTH);
 
-	EEPROM_WriteValues();
+	EEPROM_Write(board_static.bytes, STRUCT_SIZE);
 }

@@ -21,9 +21,8 @@
 #define EEPROM_BLOCK_SIZE 256U
 
 BSP_StatusTypeDef EEPROM_Reset(void);
-BSP_StatusTypeDef EEPROM_WriteDefaultValues(void);
-BSP_StatusTypeDef EEPROM_WritetValues(void);
-BSP_StatusTypeDef EEPROM_Read(union bsp_data *union_data, uint16_t size);
+BSP_StatusTypeDef EEPROM_Write(union bsp_data *union_data, size_t size);
+BSP_StatusTypeDef EEPROM_Read(union bsp_data *union_data, size_t size);
 BSP_StatusTypeDef EEPROM_Status(void);
 
 #endif /* INC_EEPROM_H_ */

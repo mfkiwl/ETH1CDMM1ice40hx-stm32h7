@@ -54,6 +54,8 @@
 #include "scpi_configure.h"
 
 
+extern I2C_HandleTypeDef hi2c4;
+
 extern SDRAM_HandleTypeDef hsdram1;
 extern SPI_HandleTypeDef hspi1;
 
@@ -83,7 +85,8 @@ static scpi_result_t TEST_TSQ(scpi_t * context)
 	HAL_SPI_Transmit(&hspi1, data, 1, 1000);
 	HAL_GPIO_WritePin(FPGA_SPI1_NSS_GPIO_Port, FPGA_SPI1_NSS_Pin, 1); */
 
-	EEPROM_Status();
+
+	SCPI_ResultBool(context, 1);
 
 
 	return SCPI_RES_OK;
