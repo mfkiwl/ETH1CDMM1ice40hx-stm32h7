@@ -56,6 +56,7 @@
 #include "lwip/inet.h"
 #include "lwip/api.h"
 #include "queue.h"
+#include "bsp.h"
 
 
 #define DEVICE_PORT 2000
@@ -379,7 +380,7 @@ static void scpi_server_thread(void *arg) {
 
     scpi_context.user_context = &user_data;
 
-    user_data.io_listen = createServer(DEVICE_PORT);
+    user_data.io_listen = createServer(board_static.structure.ip4.port);
     user_data.control_io_listen = createServer(CONTROL_PORT);
 
     while (1) {

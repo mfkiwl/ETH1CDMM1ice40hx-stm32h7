@@ -8,6 +8,6 @@
 #ifndef INC_BSP_INIT_H_
 #define INC_BSP_INIT_H_
 
-void BSP_Init();
+BSP_StatusTypeDef BSP_Init();
 
 #endif /* INC_BSP_INIT_H_ */

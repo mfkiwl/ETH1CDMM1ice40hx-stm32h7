@@ -245,7 +245,7 @@ scpi_result_t SCPI_TriggerSlope(scpi_t* context)
 	}
 
 
-	HAL_GPIO_DeInit(TRIG_IN_GPIO_Port, &GPIO_InitStruct);
+	HAL_GPIO_DeInit(TRIG_IN_GPIO_Port, TRIG_IN_Pin);
 	GPIO_InitStruct.Pin = TRIG_IN_Pin;
 
 	switch(paramSLOPE)
@@ -350,5 +350,5 @@ scpi_result_t SCPI_TRG(scpi_t* context)
 		SCPI_ErrorPush(context, SCPI_ERROR_TRIGGER_IGNORED);
 		return SCPI_RES_ERR;
 	}
-
+	return SCPI_RES_OK;
 }

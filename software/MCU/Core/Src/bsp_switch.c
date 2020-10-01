@@ -17,27 +17,27 @@ void SWITCH_ULN2003A_Control(uint8_t relay, uint8_t state)
 
 		switch(select)
 		{
-			case CXN_REL1:	RELAY_GPIO_WritePin(CXN_REL1_GPIO_Port, CXN_REL1_Pin, state); break;
-			case CXN_REL2:	RELAY_GPIO_WritePin(CXN_REL2_GPIO_Port, CXN_REL2_Pin, state); break;
-			case CXN_REL3:	RELAY_GPIO_WritePin(CXN_REL3_GPIO_Port, CXN_REL3_Pin, state); break;
-			case CXN_REL4:	RELAY_GPIO_WritePin(CXN_REL4_GPIO_Port, CXN_REL4_Pin, state); break;
-			case CXN_REL5:	RELAY_GPIO_WritePin(CXN_REL5_GPIO_Port, CXN_REL5_Pin, state); break;
+			case CXN_REL1:	HAL_GPIO_WritePin(CXN_REL1_GPIO_Port, CXN_REL1_Pin, state); break;
+			case CXN_REL2:	HAL_GPIO_WritePin(CXN_REL2_GPIO_Port, CXN_REL2_Pin, state); break;
+			case CXN_REL3:	HAL_GPIO_WritePin(CXN_REL3_GPIO_Port, CXN_REL3_Pin, state); break;
+			case CXN_REL4:	HAL_GPIO_WritePin(CXN_REL4_GPIO_Port, CXN_REL4_Pin, state); break;
+			case CXN_REL5:	HAL_GPIO_WritePin(CXN_REL5_GPIO_Port, CXN_REL5_Pin, state); break;
 		}
 	}
 }
 
 void SWITCH_ULN2003A_ClearAll()
 {
-	RELAY_GPIO_WritePin(CXN_REL1_GPIO_Port, CXN_REL1_Pin, SWITCH_OFF);
-	RELAY_GPIO_WritePin(CXN_REL2_GPIO_Port, CXN_REL2_Pin, SWITCH_OFF);
-	RELAY_GPIO_WritePin(CXN_REL3_GPIO_Port, CXN_REL3_Pin, SWITCH_OFF);
-	RELAY_GPIO_WritePin(CXN_REL4_GPIO_Port, CXN_REL4_Pin, SWITCH_OFF);
-	RELAY_GPIO_WritePin(CXN_REL5_GPIO_Port, CXN_REL5_Pin, SWITCH_OFF);
+	HAL_GPIO_WritePin(CXN_REL1_GPIO_Port, CXN_REL1_Pin, SWITCH_OFF);
+	HAL_GPIO_WritePin(CXN_REL2_GPIO_Port, CXN_REL2_Pin, SWITCH_OFF);
+	HAL_GPIO_WritePin(CXN_REL3_GPIO_Port, CXN_REL3_Pin, SWITCH_OFF);
+	HAL_GPIO_WritePin(CXN_REL4_GPIO_Port, CXN_REL4_Pin, SWITCH_OFF);
+	HAL_GPIO_WritePin(CXN_REL5_GPIO_Port, CXN_REL5_Pin, SWITCH_OFF);
 }
 
 BSP_StatusTypeDef SWITCH_MCZ33996_Control(uint8_t relay, uint8_t state)
 {
-
+	return BSP_OK;
 }
 
 void SWITCH_MCZ33996_ClearAll()
@@ -105,4 +105,9 @@ void SWITCH_TMUX6104_ClearAll()
 	HAL_GPIO_WritePin(DC_AMP2_MUX_EN_GPIO_Port, DC_AMP2_MUX_EN_Pin, SWITCH_OFF);
 	HAL_GPIO_WritePin(DC_AMP2_MUX_A0_GPIO_Port, DC_AMP2_MUX_A0_Pin, SWITCH_OFF);
 	HAL_GPIO_WritePin(DC_AMP2_MUX_A1_GPIO_Port, DC_AMP2_MUX_A1_Pin, SWITCH_OFF);
+}
+
+void SWITCH_SelectDMMFunction(uint8_t dmm_function)
+{
+
 }

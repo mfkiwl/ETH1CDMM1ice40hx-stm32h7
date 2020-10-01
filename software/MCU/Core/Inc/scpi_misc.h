@@ -18,5 +18,9 @@ scpi_result_t SCPI_RQ(scpi_t * context);
 scpi_result_t SCPI_ReadQ(scpi_t * context);
 scpi_result_t SCPI_SampleCount(scpi_t * context);
 scpi_result_t SCPI_SampleCountQ(scpi_t * context);
+scpi_result_t SCPI_RouteOpen(scpi_t * context);
+scpi_result_t SCPI_RouteOpenQ(scpi_t * context);
+scpi_result_t SCPI_RouteClose(scpi_t * context);
+scpi_result_t SCPI_RouteCloseQ(scpi_t * context);
 
 #endif /* INC_SCPI_MISC_H_ */

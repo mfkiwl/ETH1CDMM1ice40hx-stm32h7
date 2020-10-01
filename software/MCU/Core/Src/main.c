@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "bsp.h"
 #include "bsp_init.h"
+#include "scpi_server.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -762,6 +763,11 @@ void StartLEDTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
+	  if(board_current.default_cfg)
+	  {
+		  HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, 1);
+	  }
+
 	HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
 	osDelay(pdMS_TO_TICKS(500));
   }

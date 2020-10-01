@@ -5,8 +5,8 @@
  *      Author: grzegorz
  */
 
-#ifndef INC_HDC1080_H_
-#define INC_HDC1080_H_
+#ifndef INC_BSP_HDC1080_H_
+#define INC_BSP_HDC1080_H_
 
 #include "stm32f7xx_hal.h"
 
@@ -31,4 +31,4 @@
 HAL_StatusTypeDef HDC1080_measure_temperature(I2C_HandleTypeDef *hi2c, double *temperature);
 HAL_StatusTypeDef HDC1080_measure_humidity(I2C_HandleTypeDef *hi2c, double *humidity);
 
-#endif /* INC_HDC1080_H_ */
+#endif /* INC_BSP_HDC1080_H_ */

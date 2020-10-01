@@ -35,6 +35,7 @@
  */
 
 #include <bsp.h>
+#include <bsp_eeprom.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -42,8 +43,6 @@
 #include "scpi_def.h"
 #include "scpi/scpi.h"
 #include "main.h"
-#include "eeprom.h"
-
 #include "scpi_system.h"
 #include "scpi_trigger.h"
 #include "scpi_measure.h"
@@ -271,6 +270,11 @@ const scpi_command_t scpi_commands[] = {
 	{.pattern="READ?", .callback = SCPI_ReadQ,},
 	{.pattern="SAMPle:COUNt", .callback = SCPI_SampleCount,},
 	{.pattern="SAMPle:COUNt?", .callback = SCPI_SampleCountQ,},
+	{.pattern="[ROUTe]:OPEN", .callback = SCPI_RouteOpen,},
+	{.pattern="[ROUTe]:OPEN?", .callback = SCPI_RouteOpenQ,},
+	{.pattern="[ROUTe]:CLOSe", .callback = SCPI_RouteClose,},
+	{.pattern="[ROUTe]:CLOSe?", .callback = SCPI_RouteCloseQ,},
+
 
 	// scpi_calibration.c
 	{.pattern="CALibration:ADC?", .callback = SCPI_CalibrationADCQ,},

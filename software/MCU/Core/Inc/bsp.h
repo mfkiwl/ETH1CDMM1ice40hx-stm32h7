@@ -93,10 +93,10 @@ enum dmm_function_enum
 // size 196
 struct bsp_scpi_info
 {
-	int8_t manufacturer[SCPI_MANUFACTURER_STRING_LENGTH];
-	int8_t device[SCPI_DEVICE_STRING_LENGTH];
-	int8_t serial_number[SCPI_SERIALNUMBER_STRING_LENGTH];
-	int8_t software_version[SCPI_SOFTWAREVERSION_STRING_LENGTH];
+	char manufacturer[SCPI_MANUFACTURER_STRING_LENGTH];
+	char device[SCPI_DEVICE_STRING_LENGTH];
+	char serial_number[SCPI_SERIALNUMBER_STRING_LENGTH];
+	char software_version[SCPI_SOFTWAREVERSION_STRING_LENGTH];
 
 };
 
@@ -127,14 +127,14 @@ struct bsp_ip4_lan
 	uint8_t netmask[4];
 	uint8_t gateway[4];
 	uint8_t MAC[6];
-	int8_t hostname[HOSTNAME_LENGTH];
+	char hostname[HOSTNAME_LENGTH];
 	uint16_t port;
 };
 
 // size 49
 struct bsp_security
 {
-	int8_t password[PASSWORD_LENGTH];
+	char password[PASSWORD_LENGTH];
 };
 
 // size 1
@@ -143,11 +143,17 @@ struct bsp_temperature
 	uint8_t unit;
 };
 
+struct bsp_relay
+{
+	uint8_t status[5];
+
+};
+
 typedef struct bsp_ip4_lan bsp_ip4_lan_t;
 typedef struct bsp_scpi_info bsp_scpi_info_t;
 typedef struct bsp_security bsp_security_t;
 typedef struct bsp_temperature bsp_temperature_t;
-
+typedef struct bsp_relay bsp_relay_t;
 
 
 union bsp_data
@@ -171,6 +177,7 @@ struct bsp_status
 	uint8_t default_cfg;
 	bsp_dmm_t dmm;
 	bsp_ip4_lan_t ip4;
+	bsp_relay_t relay;
 
 }board_current;
 

@@ -14,11 +14,11 @@
 #define U1011 1
 #define U1006 2
 
-#define CXN_REL1 1
-#define CXN_REL2 2
-#define CXN_REL3 3
-#define CXN_REL4 4
-#define CXN_REL5 5
+#define CXN_REL1 0x01
+#define CXN_REL2 0x02
+#define CXN_REL3 0x04
+#define CXN_REL4 0x08
+#define CXN_REL5 0x10
 
 #define DCV_L_CTR	1
 #define VZERO_CTR	2
@@ -31,7 +31,7 @@
 #define DCV_A_CTR	9
 #define L_RLY		10
 #define XH_RLY		11
-#define XO-A_RLY	12
+#define XO_A_RLY 	12
 
 #define GAIN_CIRCUIT1 0
 #define GAIN_CIRCUIT2 1
