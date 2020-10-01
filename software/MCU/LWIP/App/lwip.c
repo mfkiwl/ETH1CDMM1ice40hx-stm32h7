@@ -26,7 +26,6 @@
 #endif /* MDK ARM Compiler */
 #include "ethernetif.h"
 #include <string.h>
-#include "bsp.h"
 
 /* USER CODE BEGIN 0 */
 
@@ -66,18 +65,18 @@ osThreadAttr_t attributes;
 void MX_LWIP_Init(void)
 {
   /* IP addresses initialization */
-  IP_ADDRESS[0] = board_static.structure.ip4.address[0];
-  IP_ADDRESS[1] = board_static.structure.ip4.address[1];
-  IP_ADDRESS[2] = board_static.structure.ip4.address[2];
-  IP_ADDRESS[3] = board_static.structure.ip4.address[3];
-  NETMASK_ADDRESS[0] = board_static.structure.ip4.netmask[0];
-  NETMASK_ADDRESS[1] = board_static.structure.ip4.netmask[1];
-  NETMASK_ADDRESS[2] = board_static.structure.ip4.netmask[2];
-  NETMASK_ADDRESS[3] = board_static.structure.ip4.netmask[3];
-  GATEWAY_ADDRESS[0] = board_static.structure.ip4.gateway[0];
-  GATEWAY_ADDRESS[1] = board_static.structure.ip4.gateway[1];
-  GATEWAY_ADDRESS[2] = board_static.structure.ip4.gateway[2];
-  GATEWAY_ADDRESS[3] = board_static.structure.ip4.gateway[3];
+  IP_ADDRESS[0] = 192;
+  IP_ADDRESS[1] = 168;
+  IP_ADDRESS[2] = 0;
+  IP_ADDRESS[3] = 123;
+  NETMASK_ADDRESS[0] = 255;
+  NETMASK_ADDRESS[1] = 255;
+  NETMASK_ADDRESS[2] = 255;
+  NETMASK_ADDRESS[3] = 0;
+  GATEWAY_ADDRESS[0] = 192;
+  GATEWAY_ADDRESS[1] = 168;
+  GATEWAY_ADDRESS[2] = 0;
+  GATEWAY_ADDRESS[3] = 1;
 
   /* Initilialize the LwIP stack with RTOS */
   tcpip_init( NULL, NULL );

@@ -11,12 +11,12 @@
 
  scpi_choice_def_t route_input_relay_select[] =
  {
- 		{"H",  0x01},
- 		{"L",  0x02},
- 		{"I",  0x04},
-		{"LS", 0x08},
-		{"HS", 0x10},
-		{"ALL",0x1F},
+ 		{"H",  0x02},
+ 		{"L",  0x04},
+ 		{"I",  0x08},
+		{"LS", 0x10},
+		{"HS", 0x20},
+		{"ALL",0x3E},
  		SCPI_CHOICE_LIST_END
  };
 
@@ -59,6 +59,7 @@ scpi_result_t SCPI_SampleCount(scpi_t * context)
 
 scpi_result_t SCPI_SampleCountQ(scpi_t * context)
 {
+	SCPI_ResultUInt32(context, board_current.dmm.sample_count);
 	return SCPI_RES_OK;
 }
 
@@ -66,7 +67,7 @@ scpi_result_t SCPI_RouteOpen(scpi_t * context)
 {
 	int32_t param_relay;
 	uint8_t param_tmp = 0;
-	uint8_t index = 0;
+	uint8_t index = 1;
 
 	if(!SCPI_ParamChoice(context, route_input_relay_select, &param_relay, TRUE))
 	{
@@ -79,7 +80,12 @@ scpi_result_t SCPI_RouteOpen(scpi_t * context)
 	for(uint8_t i = 0; i < 5; i++)
 	{
 		index = index << 1;
-		(index == param_tmp) ? (board_current.relay.status[i] = 0) : (board_current.relay.status[i] = 1);
+		if(param_tmp & index)
+		{
+			board_current.relay.status[i] = 0;
+		}
+
+
 	}
 
 	SWITCH_ULN2003A_Control(param_relay, 0);
@@ -89,6 +95,14 @@ scpi_result_t SCPI_RouteOpen(scpi_t * context)
 
 scpi_result_t SCPI_RouteOpenQ(scpi_t * context)
 {
+	for(uint8_t i = 0; i < 5; i++)
+	{
+		if(!board_current.relay.status[i])
+		{
+			SCPI_ResultCharacters(context, arr_str[i], strlen(arr_str[i]));
+		}
+	}
+
 	return SCPI_RES_OK;
 }
 
@@ -96,7 +110,7 @@ scpi_result_t SCPI_RouteClose(scpi_t * context)
 {
 	int32_t param_relay;
 	uint8_t param_tmp = 0;
-	uint8_t index = 0;
+	uint8_t index = 1;
 
 	if(!SCPI_ParamChoice(context, route_input_relay_select, &param_relay, TRUE))
 	{
@@ -108,7 +122,11 @@ scpi_result_t SCPI_RouteClose(scpi_t * context)
 	for(uint8_t i = 0; i < 5; i++)
 	{
 		index = index << 1;
-		(index == param_tmp) ? (board_current.relay.status[i] = 1) : (board_current.relay.status[i] = 0);
+		if(param_tmp & index)
+		{
+			board_current.relay.status[i] = 1;
+		}
+
 	}
 
 	SWITCH_ULN2003A_Control(param_relay, 1);
@@ -118,13 +136,12 @@ scpi_result_t SCPI_RouteClose(scpi_t * context)
 
 scpi_result_t SCPI_RouteCloseQ(scpi_t * context)
 {
-	const char* arr_str[5] = {"H", "L", "I", "LS", "HS"};
 
 	for(uint8_t i = 0; i < 5; i++)
 	{
 		if(board_current.relay.status[i])
 		{
-			SCPI_ResultCharacters(context, arr_str[5], strlen(arr_str[5]));
+			SCPI_ResultCharacters(context, arr_str[i], strlen(arr_str[i]));
 		}
 	}
 

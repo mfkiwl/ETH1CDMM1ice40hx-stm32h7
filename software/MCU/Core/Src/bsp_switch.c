@@ -13,7 +13,8 @@ void SWITCH_ULN2003A_Control(uint8_t relay, uint8_t state)
 
 	for(uint8_t i = 0; i < HE3621_REL_COUNT; i++)
 	{
-		select = relay & (shift << i);
+		shift = shift << 1;
+		select = relay & shift;
 
 		switch(select)
 		{
@@ -23,6 +24,8 @@ void SWITCH_ULN2003A_Control(uint8_t relay, uint8_t state)
 			case CXN_REL4:	HAL_GPIO_WritePin(CXN_REL4_GPIO_Port, CXN_REL4_Pin, state); break;
 			case CXN_REL5:	HAL_GPIO_WritePin(CXN_REL5_GPIO_Port, CXN_REL5_Pin, state); break;
 		}
+
+
 	}
 }
 

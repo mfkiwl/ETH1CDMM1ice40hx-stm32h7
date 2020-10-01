@@ -14,11 +14,11 @@
 #define U1011 1
 #define U1006 2
 
-#define CXN_REL1 0x01
-#define CXN_REL2 0x02
-#define CXN_REL3 0x04
-#define CXN_REL4 0x08
-#define CXN_REL5 0x10
+#define CXN_REL1 0x02
+#define CXN_REL2 0x04
+#define CXN_REL3 0x08
+#define CXN_REL4 0x10
+#define CXN_REL5 0x20
 
 #define DCV_L_CTR	1
 #define VZERO_CTR	2

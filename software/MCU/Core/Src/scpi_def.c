@@ -51,12 +51,14 @@
 #include "scpi_misc.h"
 #include "scpi_sense.h"
 #include "scpi_configure.h"
-
+#include "cmsis_os.h"
 
 extern I2C_HandleTypeDef hi2c4;
 
 extern SDRAM_HandleTypeDef hsdram1;
 extern SPI_HandleTypeDef hspi1;
+extern SPI_HandleTypeDef hspi4;
+
 
 scpi_choice_def_t boolean_select[] =
 {
@@ -71,22 +73,16 @@ scpi_choice_def_t boolean_select[] =
 
 static scpi_result_t TEST_TSQ(scpi_t * context)
 {
-/*	uint8_t data[1];
-	uint8_t val_bool;
-	if(!SCPI_ParamBool(context, &val_bool, TRUE))
-	{
-		return SCPI_RES_ERR;
-	}
+	uint8_t tx_data[3] = {0x00, 0xFF, 0xFF};
+	uint8_t rx_data[3];
 
-	val_bool == 1?(data[0] = 0x55):(data[0] = 0x54);
-
-	HAL_GPIO_WritePin(FPGA_SPI1_NSS_GPIO_Port, FPGA_SPI1_NSS_Pin, 0);
-	HAL_SPI_Transmit(&hspi1, data, 1, 1000);
-	HAL_GPIO_WritePin(FPGA_SPI1_NSS_GPIO_Port, FPGA_SPI1_NSS_Pin, 1); */
-
-
-	SCPI_ResultBool(context, 1);
-
+	HAL_GPIO_WritePin(SLE_nRST_GPIO_Port, SLE_nRST_Pin, 1);
+	osDelay(pdMS_TO_TICKS(10));
+	HAL_GPIO_WritePin(SLE_nCS_GPIO_Port, SLE_nCS_Pin, 0);
+	osDelay(pdMS_TO_TICKS(10));
+	HAL_SPI_TransmitReceive(&hspi4, tx_data, rx_data, 3, 1000);
+	HAL_SPI_TransmitReceive(&hspi4, tx_data, rx_data, 3, 1000);
+	HAL_GPIO_WritePin(SLE_nCS_GPIO_Port, SLE_nCS_Pin, 1);
 
 	return SCPI_RES_OK;
 }

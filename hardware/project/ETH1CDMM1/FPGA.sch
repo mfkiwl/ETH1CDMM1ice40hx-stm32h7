@@ -1385,7 +1385,6 @@ NoConn ~ 5950 3550
 NoConn ~ 5950 3650
 NoConn ~ 5950 3750
 NoConn ~ 5950 3850
-NoConn ~ 5950 3950
 $Comp
 L power:PWR_FLAG #FLG0601
 U 1 1 5F4D8556
@@ -1771,4 +1770,8 @@ Wire Wire Line
 	800  6450 1350 6450
 Text Notes 7200 6750 0    50   ~ 0
 Forgot to connect COMP. Temporary connected to 144
+Wire Wire Line
+	5600 3950 5950 3950
+Text Label 5600 3950 0    50   ~ 0
+COMP
 $EndSCHEMATC
