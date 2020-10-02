@@ -10,6 +10,9 @@
 
 #include "scpi/scpi.h"
 
+scpi_result_t SCPI_SenseFunctionOn(scpi_t * context);
+scpi_result_t SCPI_SenseFunctionOnQ(scpi_t * context);
+
 scpi_result_t SCPI_SenseCurrentDCNullState(scpi_t * context);
 scpi_result_t SCPI_SenseCurrentDCNullStateQ(scpi_t * context);
 scpi_result_t SCPI_SenseCurrentDCNullValue(scpi_t * context);

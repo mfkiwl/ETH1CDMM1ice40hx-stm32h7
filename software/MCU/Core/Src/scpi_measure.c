@@ -39,7 +39,7 @@ scpi_result_t SCPI_MeasureCurrentDCQ(scpi_t * context)
 
 
 /*
- * MEASure:[VOLtage][:DC]:RATio [{<range>|AUTO|MIN|MAX|DEF} [,{<resolution>|MIN|MAX|DEF}]]
+ * MEASure:[VOLtage][:DC] [{<range>|AUTO|MIN|MAX|DEF} [,{<resolution>|MIN|MAX|DEF}]]
  *
  * @INFO:
  * Sets all measurement parameters and trigger parameters to their default values for DC voltage ratio measurements
@@ -51,7 +51,7 @@ scpi_result_t SCPI_MeasureCurrentDCQ(scpi_t * context)
  *
  */
 
-scpi_result_t SCPI_MeasureVoltageDCRatio(scpi_t * context)
+scpi_result_t SCPI_MeasureVoltageDC(scpi_t * context)
 {
 	return SCPI_RES_OK;
 }
@@ -63,7 +63,7 @@ scpi_result_t SCPI_MeasureVoltageDCRatio(scpi_t * context)
  *
  */
 
-scpi_result_t SCPI_MeasureVoltageDCRatioQ(scpi_t * context)
+scpi_result_t SCPI_MeasureVoltageDCQ(scpi_t * context)
 {
 	return SCPI_RES_OK;
 }

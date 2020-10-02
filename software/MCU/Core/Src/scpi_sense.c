@@ -7,6 +7,17 @@
 
 #include "scpi_sense.h"
 
+
+scpi_result_t SCPI_SenseFunctionOn(scpi_t * context)
+{
+	return SCPI_RES_OK;
+}
+
+scpi_result_t SCPI_SenseFunctionOnQ(scpi_t * context)
+{
+	return SCPI_RES_OK;
+}
+
 scpi_result_t SCPI_SenseCurrentDCNullState(scpi_t * context)
 {
 	return SCPI_RES_OK;

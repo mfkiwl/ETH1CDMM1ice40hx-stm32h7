@@ -85,7 +85,8 @@ enum dmm_function_enum
 	dc_voltage = 1,
 	dc_current = 2,
 	resistance_2w = 3,
-	resistance_4w = 4
+	resistance_4w = 4,
+	autozero = 5
 };
 
 #pragma pack(push, 1)

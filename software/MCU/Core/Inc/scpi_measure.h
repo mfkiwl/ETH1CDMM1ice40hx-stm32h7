@@ -12,7 +12,7 @@
 
 scpi_result_t SCPI_MeasureCurrentDC(scpi_t * context);
 scpi_result_t SCPI_MeasureCurrentDCQ(scpi_t * context);
-scpi_result_t SCPI_MeasureVoltageDCRatio(scpi_t * context);
-scpi_result_t SCPI_MeasureVoltageDCRatioQ(scpi_t * context);
+scpi_result_t SCPI_MeasureVoltageDC(scpi_t * context);
+scpi_result_t SCPI_MeasureVoltageDCQ(scpi_t * context);
 
 #endif /* INC_SCPI_MEASURE_H_ */

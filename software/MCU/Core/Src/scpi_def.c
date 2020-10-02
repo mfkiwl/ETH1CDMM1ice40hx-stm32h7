@@ -53,12 +53,7 @@
 #include "scpi_configure.h"
 #include "cmsis_os.h"
 
-extern I2C_HandleTypeDef hi2c4;
-
-extern SDRAM_HandleTypeDef hsdram1;
-extern SPI_HandleTypeDef hspi1;
-extern SPI_HandleTypeDef hspi4;
-
+#include "bsp_switch.h"
 
 scpi_choice_def_t boolean_select[] =
 {
@@ -73,17 +68,9 @@ scpi_choice_def_t boolean_select[] =
 
 static scpi_result_t TEST_TSQ(scpi_t * context)
 {
-	uint8_t tx_data[3] = {0x00, 0xFF, 0xFF};
-	uint8_t rx_data[3];
-
-	HAL_GPIO_WritePin(SLE_nRST_GPIO_Port, SLE_nRST_Pin, 1);
-	osDelay(pdMS_TO_TICKS(10));
-	HAL_GPIO_WritePin(SLE_nCS_GPIO_Port, SLE_nCS_Pin, 0);
-	osDelay(pdMS_TO_TICKS(10));
-	HAL_SPI_TransmitReceive(&hspi4, tx_data, rx_data, 3, 1000);
-	HAL_SPI_TransmitReceive(&hspi4, tx_data, rx_data, 3, 1000);
-	HAL_GPIO_WritePin(SLE_nCS_GPIO_Port, SLE_nCS_Pin, 1);
-
+	SWITCH_MCZ33996_Control(XO_A_RLY, 1);
+	osDelay(pdMS_TO_TICKS(1000));
+	SWITCH_MCZ33996_Control(XO_A_RLY, 0);
 	return SCPI_RES_OK;
 }
 
@@ -173,18 +160,20 @@ const scpi_command_t scpi_commands[] = {
 	{.pattern = "TRIGger:SLOPe", .callback = SCPI_TriggerSlope,},
 	{.pattern = "TRIGger:SLOPe?", .callback = SCPI_TriggerSlopeQ,},
 
-	{.pattern = "TRIGger:OUTput", .callback = SCPI_TriggerOutput,},
-	{.pattern = "TRIGger:OUTput:SLOPe", .callback = SCPI_TriggerOutputSlope,},
-	{.pattern = "TRIGger:OUTput:SLOPe?", .callback = SCPI_TriggerOutputSlopeQ,},
+	{.pattern = "OUTput:TRIGger", .callback = SCPI_TriggerOutput,},
+	{.pattern = "OUTput:TRIGger:SLOPe", .callback = SCPI_TriggerOutputSlope,},
+	{.pattern = "OUTput:TRIGger:SLOPe?", .callback = SCPI_TriggerOutputSlopeQ,},
 	{.pattern = "*TRG", .callback = SCPI_TRG,},
 
 	// scpi_measure.c
 	{.pattern="MEASure:CURRent[:DC]", .callback = SCPI_MeasureCurrentDC,},
 	{.pattern="MEASure:CURRent[:DC]?", .callback = SCPI_MeasureCurrentDCQ,},
-	{.pattern="MEASure[:VOLTage][:DC]:RATio", .callback = SCPI_MeasureVoltageDCRatio,},
-	{.pattern="MEASure[:VOLTage][:DC]:RATio?", .callback = SCPI_MeasureVoltageDCRatioQ,},
+	{.pattern="MEASure[:VOLTage][:DC]", .callback = SCPI_MeasureVoltageDC,},
+	{.pattern="MEASure[:VOLTage][:DC]?", .callback = SCPI_MeasureVoltageDCQ,},
 
 	// scpi_sense.c
+	{.pattern="[SENSe:]FUNCtion[:ON]", .callback = SCPI_SenseFunctionOn,},
+	{.pattern="[SENSe:]FUNCtion[:ON]?", .callback = SCPI_SenseFunctionOnQ,},
 	{.pattern="[SENSe:]CURRent:DC:NULL[:STATe]", .callback = SCPI_SenseCurrentDCNullState,},
 	{.pattern="[SENSe:]CURRent:DC:NULL[:STATe]?", .callback = SCPI_SenseCurrentDCNullStateQ,},
 	{.pattern="[SENSe:]CURRent:DC:NULL:VALue", .callback = SCPI_SenseCurrentDCNullValue,},
@@ -244,11 +233,9 @@ const scpi_command_t scpi_commands[] = {
 
 	// scpi_configure.c
 	{.pattern="CONFigure?", .callback = SCPI_ConfigureQ,},
-	{.pattern="CONFigure:CURRent:AC", .callback = SCPI_ConfigureCurrentAC,},
-	{.pattern="CONFigure:CURRent:DC", .callback = SCPI_ConfigureCurrentDC,},
+	{.pattern="CONFigure:CURRent[:DC]", .callback = SCPI_ConfigureCurrentDC,},
 	{.pattern="CONFigure:RESistance", .callback = SCPI_ConfigureResistance,},
-	{.pattern="CONFigure:VOLTage:AC", .callback = SCPI_ConfigureVoltageAC,},
-	{.pattern="CONFigure:VOLTage:DC", .callback = SCPI_ConfigureVoltageDC,},
+	{.pattern="CONFigure:VOLTage[:DC]", .callback = SCPI_ConfigureVoltageDC,},
 
 	// scpi_data.c
 	{.pattern="DATA:LAST?", .callback = SCPI_DataLastQ,},

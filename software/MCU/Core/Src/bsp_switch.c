@@ -7,6 +7,11 @@
 
 #include "bsp_switch.h"
 
+extern SPI_HandleTypeDef hspi4;
+
+switch_data_t mcz33996_pins = {.word16 = 0};
+
+
 void SWITCH_ULN2003A_Control(uint8_t relay, uint8_t state)
 {
 	uint8_t select = 0, shift = 0x01;
@@ -38,14 +43,44 @@ void SWITCH_ULN2003A_ClearAll()
 	HAL_GPIO_WritePin(CXN_REL5_GPIO_Port, CXN_REL5_Pin, SWITCH_OFF);
 }
 
-BSP_StatusTypeDef SWITCH_MCZ33996_Control(uint8_t relay, uint8_t state)
+BSP_StatusTypeDef SWITCH_MCZ33996_Control(uint16_t relay, uint8_t state)
 {
+	uint8_t tx_data[3] = {0x00, 0x00, 0x00};
+	uint8_t rx_data[3];
+	BSP_StatusTypeDef status;
+
+
+	if(state)
+	{
+		mcz33996_pins.word16 |= relay;
+	}
+	else
+	{
+		mcz33996_pins.word16 &= (~relay);
+	}
+
+	tx_data[1] = mcz33996_pins.bytes[1];
+	tx_data[2] = mcz33996_pins.bytes[0];
+
+	HAL_GPIO_WritePin(SLE_nCS_GPIO_Port, SLE_nCS_Pin, 0);
+	status = HAL_SPI_TransmitReceive(&hspi4, tx_data, rx_data, 3, 1000);
+	HAL_GPIO_WritePin(SLE_nCS_GPIO_Port, SLE_nCS_Pin, 1);
+
+	return status;
 	return BSP_OK;
 }
 
-void SWITCH_MCZ33996_ClearAll()
+BSP_StatusTypeDef SWITCH_MCZ33996_ClearAll()
 {
+	uint8_t tx_data[3] = {0x00, 0x00, 0x00};
+	uint8_t rx_data[3];
+	BSP_StatusTypeDef status;
 
+	HAL_GPIO_WritePin(SLE_nCS_GPIO_Port, SLE_nCS_Pin, 0);
+	status = HAL_SPI_TransmitReceive(&hspi4, tx_data, rx_data, 3, 1000);
+	HAL_GPIO_WritePin(SLE_nCS_GPIO_Port, SLE_nCS_Pin, 1);
+
+	return status;
 }
 
 void SWITCH_DG419_Control(uint8_t gain_circuit)

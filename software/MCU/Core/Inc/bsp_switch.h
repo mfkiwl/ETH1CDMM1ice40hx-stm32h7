@@ -20,18 +20,18 @@
 #define CXN_REL4 0x10
 #define CXN_REL5 0x20
 
-#define DCV_L_CTR	1
-#define VZERO_CTR	2
-#define R4W_LO_CTR	3
-#define MZ_CTR		4
-#define DCV_H_CTR	5
-#define MC_CTR		6
-#define AMPS_CTR	7
-#define R4W_HI_CTR	8
-#define DCV_A_CTR	9
-#define L_RLY		10
-#define XH_RLY		11
-#define XO_A_RLY 	12
+#define DCV_L_CTR	0x0001U
+#define VZERO_CTR	0x0002U
+#define R4W_LO_CTR	0x0004U
+#define MZ_CTR		0x0008U
+#define DCV_H_CTR	0x0010U
+#define MC_CTR		0x0020U
+#define AMPS_CTR	0x0040U
+#define R4W_HI_CTR	0x0080U
+#define DCV_A_CTR	0x0100U
+#define L_RLY		0x2000U
+#define XH_RLY		0x4000U
+#define XO_A_RLY 	0x8000U
 
 #define GAIN_CIRCUIT1 0
 #define GAIN_CIRCUIT2 1
@@ -51,11 +51,19 @@
 
 #define HE3621_REL_COUNT 5
 
+typedef union
+{
+	uint16_t word16;
+	uint8_t bytes[2];
+}switch_data_t;
+
+
+
 void SWITCH_ULN2003A_Control(uint8_t relay, uint8_t state);
 void SWITCH_ULN2003A_ClearAll();
 
-BSP_StatusTypeDef SWITCH_MCZ33996_Control(uint8_t relay, uint8_t state);
-void SWITCH_MCZ33996_ClearAll();
+BSP_StatusTypeDef SWITCH_MCZ33996_Control(uint16_t relay, uint8_t state);
+BSP_StatusTypeDef SWITCH_MCZ33996_ClearAll();
 
 void SWITCH_DG419_Control(uint8_t gain_circuit);
 void SWITCH_9012_Control(uint8_t select_10meg_load);
