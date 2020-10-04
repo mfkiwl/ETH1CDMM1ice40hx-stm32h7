@@ -166,7 +166,7 @@ int main(void)
   MX_I2C3_Init();
   MX_SPI1_Init();
   MX_SPI5_Init();
-  MX_USART2_Init();
+ // MX_USART2_Init();
   MX_SPI4_Init();
   /* USER CODE BEGIN 2 */
   BSP_Init();

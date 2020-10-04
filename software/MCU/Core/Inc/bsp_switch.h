@@ -43,8 +43,8 @@
 #define TMUX6104_MUX2 2
 
 #define GAIN_1		1
-#define GAIN_10		2
-#define GAIN_100	3
+#define GAIN_10		10
+#define GAIN_100	100
 
 #define SWITCH_OFF		0
 #define SWITCH_ON		1

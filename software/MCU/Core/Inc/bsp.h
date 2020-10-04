@@ -106,6 +106,9 @@ struct bsp_dmm
 {
 	uint32_t sample_count;
 	uint8_t function;
+	float range;
+	uint8_t gain;
+	uint16_t switch_path;
 };
 
 typedef struct bsp_dmm bsp_dmm_t;

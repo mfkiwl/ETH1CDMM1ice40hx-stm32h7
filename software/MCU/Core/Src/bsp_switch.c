@@ -145,7 +145,20 @@ void SWITCH_TMUX6104_ClearAll()
 	HAL_GPIO_WritePin(DC_AMP2_MUX_A1_GPIO_Port, DC_AMP2_MUX_A1_Pin, SWITCH_OFF);
 }
 
-void SWITCH_SelectDMMFunction(uint8_t dmm_function)
+void SWITCH_SelectFunction(uint8_t dmm_function, uint16_t switch_path, uint8_t gain)
 {
+	SWITCH_TMUX6104_ClearAll();
+	if(BSP_OK == SWITCH_MCZ33996_ClearAll())
+	{
+		switch(board_current.dmm.function)
+		{
+			case dc_voltage:
+								SWITCH_9012_Control(1);
+								SWITCH_DG419_Control(1);
+								SWITCH_TMUX6104_Control(TMUX6104_MUX2, gain);
+								SWITCH_MCZ33996_Control(switch_path, SWITCH_ON); break;
+			default: break;
+		}
+	}
 
 }

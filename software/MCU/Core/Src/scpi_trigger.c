@@ -51,16 +51,16 @@ extern osThreadId_t TriggerTaskHandle;
 
 scpi_result_t SCPI_TriggerDelay(scpi_t* context)
 {
-	scpi_number_t paramDELAY;
+	scpi_number_t param_delay;
 
-	if(!SCPI_ParamNumber(context, scpi_special_numbers_def, &paramDELAY, TRUE))
+	if(!SCPI_ParamNumber(context, scpi_special_numbers_def, &param_delay, TRUE))
 	{
 		return SCPI_RES_ERR;
 	}
 
-	if(paramDELAY.special)
+	if(param_delay.special)
 	{
-		switch(paramDELAY.content.tag)
+		switch(param_delay.content.tag)
 		{
 		case SCPI_NUM_MIN: board_current.trigger.delay = 0; break;
 		case SCPI_NUM_MAX: board_current.trigger.delay = 1000; break;
@@ -69,22 +69,22 @@ scpi_result_t SCPI_TriggerDelay(scpi_t* context)
 	}
 	else
 	{
-		if(SCPI_UNIT_NONE == paramDELAY.unit || SCPI_UNIT_UNITLESS == paramDELAY.unit)
+		if(SCPI_UNIT_NONE == param_delay.unit || SCPI_UNIT_UNITLESS == param_delay.unit)
 		{
-			if(paramDELAY.content.value < 0 || paramDELAY.content.value > 1000)
+			if(param_delay.content.value < 0 || param_delay.content.value > 1000)
 			{
 				SCPI_ErrorPush(context, SCPI_ERROR_DATA_OUT_OF_RANGE);
 				return SCPI_RES_ERR;
 			}
 			else
 			{
-				board_current.trigger.delay = paramDELAY.content.value;
+				board_current.trigger.delay = param_delay.content.value;
 				return SCPI_RES_OK;
 			}
 		}
-		else if (SCPI_UNIT_SECOND == paramDELAY.unit)
+		else if (SCPI_UNIT_SECOND == param_delay.unit)
 		{
-			board_current.trigger.delay = paramDELAY.content.value;
+			board_current.trigger.delay = param_delay.content.value;
 			return SCPI_RES_OK;
 		}
 		else

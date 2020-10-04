@@ -38,7 +38,7 @@ BSP_StatusTypeDef EEPROM_Reset()
 
 }
 
-BSP_StatusTypeDef EEPROM_Write(union bsp_data *union_data, size_t size)
+BSP_StatusTypeDef EEPROM_Write(union bsp_data* union_data, size_t size)
 {
 	uint8_t tx_data = EEPROM_WRITE_DONE;
 
@@ -68,7 +68,7 @@ BSP_StatusTypeDef EEPROM_Write(union bsp_data *union_data, size_t size)
 	}
 }
 
-BSP_StatusTypeDef EEPROM_Read(union bsp_data *union_data, size_t size)
+BSP_StatusTypeDef EEPROM_Read(union bsp_data* union_data, size_t size)
 {
 
 	if(ee24_isConnected())

@@ -54,6 +54,44 @@ scpi_result_t SCPI_ReadQ(scpi_t * context)
 
 scpi_result_t SCPI_SampleCount(scpi_t * context)
 {
+	scpi_number_t param_samples;
+
+	if(!SCPI_ParamNumber(context, scpi_special_numbers_def, &param_samples, TRUE))
+	{
+		return SCPI_RES_ERR;
+	}
+
+	if(param_samples.special)
+	{
+		switch(param_samples.content.tag)
+		{
+		case SCPI_NUM_MIN: board_current.dmm.sample_count = 1; break;
+		case SCPI_NUM_MAX: board_current.dmm.sample_count = 1000000; break;
+		case SCPI_NUM_DEF: board_current.dmm.sample_count= 1; break;
+		default: SCPI_ErrorPush(context, SCPI_ERROR_ILLEGAL_PARAMETER_VALUE); return SCPI_RES_ERR;
+		}
+	}
+	else
+	{
+		if(SCPI_UNIT_NONE == param_samples.unit || SCPI_UNIT_UNITLESS == param_samples.unit)
+		{
+			if(param_samples.content.value < 0 || param_samples.content.value > 1000000)
+			{
+				SCPI_ErrorPush(context, SCPI_ERROR_DATA_OUT_OF_RANGE);
+				return SCPI_RES_ERR;
+			}
+			else
+			{
+				board_current.dmm.sample_count = param_samples.content.value;
+				return SCPI_RES_OK;
+			}
+		}
+		else
+		{
+			SCPI_ErrorPush(context, SCPI_ERROR_INVALID_SUFFIX);
+			return SCPI_RES_ERR;
+		}
+	}
 	return SCPI_RES_OK;
 }
 
